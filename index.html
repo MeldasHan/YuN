@@ -7,7 +7,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>給恩恩的小角落 ❤️ </title>
+    <title>給恩恩的小角落 ❤️</title>
 
     <style>
         * {
@@ -27,22 +27,23 @@
                 "Microsoft JhengHei",
                 sans-serif;
 
-            background: linear-gradient(
-                135deg,
-                #fff5f7,
-                #ffe9ef
-            );
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff5f7,
+                    #ffe9ef
+                );
 
             color: #555;
         }
 
         .container {
-            width: min(90%, 600px);
-            padding: 50px 30px;
+            width: min(90%, 420px);
+            padding: 45px 30px;
 
             text-align: center;
 
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.9);
 
             border-radius: 24px;
 
@@ -51,43 +52,106 @@
         }
 
         .heart {
-            font-size: 64px;
-            margin-bottom: 20px;
+            font-size: 60px;
+            margin-bottom: 15px;
         }
 
         h1 {
-            margin: 0 0 15px;
+            margin: 0 0 10px;
 
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 600;
 
             color: #d96b83;
         }
 
-        p {
-            margin: 10px 0;
-            line-height: 1.8;
-        }
-
         .subtitle {
-            font-size: 18px;
+            margin-bottom: 30px;
+
+            color: #888;
+            line-height: 1.7;
         }
 
-        .status {
-            margin-top: 30px;
-            padding-top: 20px;
+        .password-input {
+            width: 100%;
 
-            border-top: 1px solid #f1d8de;
+            padding: 13px 16px;
 
+            border: 1px solid #ead3d9;
+            border-radius: 12px;
+
+            font-size: 16px;
+
+            outline: none;
+
+            transition: 0.2s;
+        }
+
+        .password-input:focus {
+            border-color: #d96b83;
+
+            box-shadow:
+                0 0 0 3px rgba(217, 107, 131, 0.1);
+        }
+
+        .login-button {
+            width: 100%;
+
+            margin-top: 15px;
+
+            padding: 13px;
+
+            border: none;
+            border-radius: 12px;
+
+            background: #d96b83;
+            color: white;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .login-button:hover {
+            transform: translateY(-1px);
+            opacity: 0.9;
+        }
+
+        .error-message {
+            min-height: 24px;
+
+            margin-top: 15px;
+
+            color: #d96b83;
             font-size: 14px;
-            color: #999;
+        }
+
+        .hint {
+            margin-top: 25px;
+
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        /* =========================
+           登入成功後的內容
+        ========================= */
+
+        #main-content {
+            display: none;
         }
     </style>
 </head>
 
 <body>
 
-    <main class="container">
+    <!-- =========================
+         密碼入口
+    ========================== -->
+
+    <main class="container" id="login-page">
 
         <div class="heart">
             ❤️
@@ -98,19 +162,116 @@
         </h1>
 
         <p class="subtitle">
-            這裡會記錄我們的點點滴滴。
+            這裡有一些只想和你分享的故事。
         </p>
 
-        <p>
-            還有好多好多故事，<br>
-            等著我們一起寫下來。
-        </p>
+        <input
+            type="password"
+            id="password"
+            class="password-input"
+            placeholder="請輸入密碼"
+            autocomplete="off"
+        >
 
-        <div class="status">
-            YuN · Our little story
+        <button
+            type="button"
+            class="login-button"
+            onclick="login()"
+        >
+            進入
+        </button>
+
+        <div
+            id="error-message"
+            class="error-message"
+        ></div>
+
+        <div class="hint">
+            一個只有我們知道的小秘密
         </div>
 
     </main>
+
+
+    <!-- =========================
+         登入成功
+    ========================== -->
+
+    <main class="container" id="main-content">
+
+        <div class="heart">
+            💕
+        </div>
+
+        <h1>
+            歡迎回來，恩恩
+        </h1>
+
+        <p class="subtitle">
+            這裡會慢慢記錄屬於我們的故事。
+        </p>
+
+        <p>
+            🌸 我們的故事，才正開始。
+        </p>
+
+    </main>
+
+
+    <script>
+
+        // =========================
+        // 密碼
+        // =========================
+
+        const PASSWORD = "enen";
+
+
+        // =========================
+        // 登入
+        // =========================
+
+        function login() {
+
+            const password =
+                document.getElementById("password").value;
+
+            const errorMessage =
+                document.getElementById("error-message");
+
+            if (password === PASSWORD) {
+
+                document.getElementById("login-page")
+                    .style.display = "none";
+
+                document.getElementById("main-content")
+                    .style.display = "block";
+
+            } else {
+
+                errorMessage.textContent =
+                    "密碼不對喔，再想一下 ❤️";
+
+            }
+
+        }
+
+
+        // =========================
+        // Enter 登入
+        // =========================
+
+        document
+            .getElementById("password")
+            .addEventListener("keydown", function(event) {
+
+                if (event.key === "Enter") {
+                    login();
+                }
+
+            });
+
+    </script>
 
 </body>
 
