@@ -2,6 +2,7 @@
 <html lang="zh-TW">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta name="viewport"
@@ -9,19 +10,22 @@
 
     <title>給恩恩的小角落 ❤️</title>
 
+
     <style>
 
-        /* ========================================
+        /* ==================================================
            基本設定
-        ======================================== */
+        ================================================== */
 
         * {
             box-sizing: border-box;
         }
 
+
         html {
             scroll-behavior: smooth;
         }
+
 
         body {
             margin: 0;
@@ -36,50 +40,51 @@
             color: #5f5557;
 
             line-height: 1.8;
+
+            overflow: hidden;
         }
 
 
-        /* ========================================
-           共用
-        ======================================== */
+        /* ==================================================
+           整個故事容器
+        ================================================== */
 
-        .section {
-            max-width: 900px;
+        .story-container {
 
-            margin: 0 auto;
+            width: 100vw;
 
-            padding: 90px 25px;
-        }
+            height: 100vh;
 
-        .section-title {
-            margin: 0 0 12px;
+            overflow-y: auto;
 
-            text-align: center;
+            overflow-x: hidden;
 
-            font-size: 28px;
+            scroll-snap-type: y mandatory;
 
-            font-weight: 500;
+            scroll-behavior: smooth;
 
-            color: #c9788b;
-        }
-
-        .section-subtitle {
-            margin: 0 0 50px;
-
-            text-align: center;
-
-            font-size: 14px;
-
-            color: #a99b9e;
+            scrollbar-width: none;
         }
 
 
-        /* ========================================
-           Hero
-        ======================================== */
+        .story-container::-webkit-scrollbar {
+            display: none;
+        }
 
-        .hero {
+
+        /* ==================================================
+           每一頁
+        ================================================== */
+
+        .story-page {
+
+            position: relative;
+
+            width: 100%;
+
             min-height: 100vh;
+
+            height: 100vh;
 
             display: flex;
 
@@ -87,39 +92,220 @@
 
             align-items: center;
 
+            scroll-snap-align: start;
+
+            scroll-snap-stop: always;
+
+            overflow: hidden;
+
+            padding: 40px 25px;
+        }
+
+
+        .page-content {
+
+            width: min(900px, 100%);
+
+            max-height: 90vh;
+
+            overflow: visible;
+
             text-align: center;
 
-            padding: 30px;
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        /* ==================================================
+           頁面背景
+        ================================================== */
+
+        .page-hero {
 
             background:
                 linear-gradient(
                     180deg,
-                    #fff4f5 0%,
+                    #fff1f4 0%,
                     #fffaf9 100%
                 );
         }
 
-        .hero-content {
-            max-width: 650px;
+
+        .page-story {
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #fffaf9 0%,
+                    #fff6f7 100%
+                );
         }
+
+
+        .page-timeline {
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #fff7f8 0%,
+                    #fffaf9 100%
+                );
+        }
+
+
+        .page-memory {
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #fffaf9 0%,
+                    #fff4f5 100%
+                );
+        }
+
+
+        .page-letter {
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #fff4f6 0%,
+                    #fffaf9 100%
+                );
+        }
+
+
+        .page-end {
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #fff0f3 0%,
+                    #fff8f9 100%
+                );
+        }
+
+
+        /* ==================================================
+           背景裝飾
+        ================================================== */
+
+        .background-heart {
+
+            position: absolute;
+
+            font-size: 25px;
+
+            opacity: 0.18;
+
+            animation:
+                floatHeart 6s ease-in-out infinite;
+        }
+
+
+        .heart-1 {
+            top: 15%;
+            left: 15%;
+        }
+
+
+        .heart-2 {
+            top: 25%;
+            right: 18%;
+
+            font-size: 18px;
+
+            animation-delay: 1s;
+        }
+
+
+        .heart-3 {
+            bottom: 18%;
+            left: 25%;
+
+            font-size: 16px;
+
+            animation-delay: 2s;
+        }
+
+
+        .heart-4 {
+            bottom: 25%;
+            right: 20%;
+
+            font-size: 30px;
+
+            animation-delay: 3s;
+        }
+
+
+        @keyframes floatHeart {
+
+            0%,
+            100% {
+                transform:
+                    translateY(0)
+                    rotate(0deg);
+            }
+
+            50% {
+                transform:
+                    translateY(-15px)
+                    rotate(5deg);
+            }
+        }
+
+
+        /* ==================================================
+           Hero
+        ================================================== */
 
         .hero-heart {
+
             margin-bottom: 20px;
 
-            font-size: 60px;
+            font-size: 68px;
+
+            animation:
+                heartBeat 2.5s ease-in-out infinite;
         }
 
+
+        @keyframes heartBeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+        }
+
+
         .hero h1 {
+
             margin: 0;
 
-            font-size: 42px;
+            font-size: clamp(
+                34px,
+                5vw,
+                48px
+            );
 
             font-weight: 500;
+
+            letter-spacing: 3px;
 
             color: #c86f83;
         }
 
+
         .hero-description {
+
             margin-top: 20px;
 
             font-size: 18px;
@@ -127,32 +313,101 @@
             color: #817477;
         }
 
+
         .hero-date {
-            margin-top: 35px;
+
+            margin-top: 30px;
 
             font-size: 13px;
+
+            letter-spacing: 2px;
 
             color: #b2a4a7;
         }
 
-        .scroll-hint {
-            margin-top: 60px;
 
-            font-size: 13px;
+        .scroll-hint {
+
+            margin-top: 55px;
 
             color: #b8a8ac;
+
+            font-size: 13px;
         }
 
 
-        /* ========================================
-           Intro
-        ======================================== */
+        .scroll-arrow {
 
-        .intro {
-            text-align: center;
+            margin-top: 8px;
+
+            font-size: 20px;
+
+            animation:
+                arrowMove 1.8s ease-in-out infinite;
         }
 
-        .intro-text {
+
+        @keyframes arrowMove {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(8px);
+            }
+        }
+
+
+        /* ==================================================
+           Chapter
+        ================================================== */
+
+        .chapter {
+
+            margin-bottom: 15px;
+
+            font-size: 12px;
+
+            letter-spacing: 4px;
+
+            color: #c48694;
+        }
+
+
+        .section-title {
+
+            margin: 0 0 15px;
+
+            font-size: clamp(
+                28px,
+                4vw,
+                38px
+            );
+
+            font-weight: 500;
+
+            color: #c9788b;
+        }
+
+
+        .section-subtitle {
+
+            margin: 0 auto 35px;
+
+            font-size: 15px;
+
+            color: #a99b9e;
+        }
+
+
+        /* ==================================================
+           Story
+        ================================================== */
+
+        .story-text {
+
             max-width: 600px;
 
             margin: 0 auto;
@@ -162,14 +417,23 @@
             color: #75696c;
         }
 
-        .quote {
-            margin-top: 45px;
 
-            padding: 25px;
+        .quote {
+
+            max-width: 600px;
+
+            margin: 40px auto 0;
+
+            padding: 25px 30px;
 
             border-left: 3px solid #e9b7c2;
 
-            background: #fff5f6;
+            background: rgba(
+                255,
+                245,
+                246,
+                0.8
+            );
 
             text-align: left;
 
@@ -179,19 +443,24 @@
         }
 
 
-        /* ========================================
+        /* ==================================================
            Timeline
-        ======================================== */
+        ================================================== */
 
         .timeline {
+
             position: relative;
 
             max-width: 650px;
 
             margin: 0 auto;
+
+            text-align: left;
         }
 
+
         .timeline::before {
+
             content: "";
 
             position: absolute;
@@ -206,31 +475,42 @@
 
             background: #ead6da;
 
-            transform: translateX(-50%);
+            transform:
+                translateX(-50%);
         }
 
+
         .timeline-item {
+
             position: relative;
 
             width: 50%;
 
-            padding: 20px 40px;
+            padding: 10px 35px;
+
+            margin-bottom: 10px;
         }
 
+
         .timeline-item:nth-child(odd) {
+
             left: 0;
 
             text-align: right;
         }
 
+
         .timeline-item:nth-child(even) {
+
             left: 50%;
         }
 
+
         .timeline-dot {
+
             position: absolute;
 
-            top: 30px;
+            top: 20px;
 
             width: 12px;
 
@@ -246,119 +526,193 @@
                 0 0 0 1px #e7c4cb;
         }
 
+
         .timeline-item:nth-child(odd)
         .timeline-dot {
+
             right: -6px;
         }
 
+
         .timeline-item:nth-child(even)
         .timeline-dot {
+
             left: -6px;
         }
 
+
         .timeline-date {
-            font-size: 13px;
+
+            font-size: 12px;
 
             color: #c48694;
         }
 
-        .timeline-title {
-            margin: 5px 0;
 
-            font-size: 18px;
+        .timeline-title {
+
+            margin: 3px 0;
+
+            font-size: 17px;
 
             font-weight: 500;
 
             color: #6d5d61;
         }
 
+
         .timeline-text {
+
             margin: 0;
 
-            font-size: 14px;
+            font-size: 13px;
 
             color: #95888b;
         }
 
 
-        /* ========================================
-           Memory Cards
-        ======================================== */
+        /* ==================================================
+           Memories
+        ================================================== */
 
         .memory-grid {
+
             display: grid;
 
             grid-template-columns:
                 repeat(2, 1fr);
 
-            gap: 25px;
+            gap: 20px;
+
+            max-width: 700px;
+
+            margin: 0 auto;
         }
 
-        .memory-card {
-            padding: 30px;
 
-            background: white;
+        .memory-card {
+
+            padding: 25px;
+
+            background: rgba(
+                255,
+                255,
+                255,
+                0.85
+            );
 
             border-radius: 18px;
 
             box-shadow:
-                0 8px 30px rgba(80, 50, 60, 0.06);
+                0 8px 30px
+                rgba(
+                    80,
+                    50,
+                    60,
+                    0.06
+                );
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
         }
+
+
+        .memory-card:hover {
+
+            transform:
+                translateY(-5px);
+
+            box-shadow:
+                0 15px 35px
+                rgba(
+                    80,
+                    50,
+                    60,
+                    0.1
+                );
+        }
+
 
         .memory-icon {
-            font-size: 30px;
 
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+
+            font-size: 28px;
         }
 
-        .memory-card h3 {
-            margin: 0 0 8px;
 
-            font-size: 18px;
+        .memory-card h3 {
+
+            margin: 0 0 5px;
+
+            font-size: 17px;
 
             font-weight: 500;
 
             color: #6d5d61;
         }
 
+
         .memory-card p {
+
             margin: 0;
 
-            font-size: 14px;
+            font-size: 13px;
 
             color: #95888b;
         }
 
 
-        /* ========================================
+        /* ==================================================
            Letter
-        ======================================== */
+        ================================================== */
 
         .letter {
+
             max-width: 650px;
 
             margin: 0 auto;
 
-            padding: 45px;
+            padding: 40px 45px;
 
-            background: #fff;
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.9
+                );
 
             border-radius: 18px;
 
             box-shadow:
-                0 8px 30px rgba(80, 50, 60, 0.05);
+                0 8px 30px
+                rgba(
+                    80,
+                    50,
+                    60,
+                    0.05
+                );
+
+            text-align: left;
         }
 
-        .letter p {
-            margin: 0 0 18px;
 
-            font-size: 16px;
+        .letter p {
+
+            margin:
+                0 0 16px;
+
+            font-size: 15px;
 
             color: #75696c;
         }
 
+
         .letter-sign {
-            margin-top: 30px;
+
+            margin-top: 25px;
 
             text-align: right;
 
@@ -366,381 +720,1172 @@
         }
 
 
-        /* ========================================
-           Footer
-        ======================================== */
+        /* ==================================================
+           End Page
+        ================================================== */
 
-        footer {
-            padding: 50px 20px;
+        .end-heart {
 
-            text-align: center;
+            margin-bottom: 25px;
 
-            background: #fff2f4;
-
-            color: #aa9298;
-
-            font-size: 13px;
+            font-size: 60px;
         }
 
 
-        /* ========================================
-           RWD
-        ======================================== */
+        .end-title {
+
+            margin: 0;
+
+            font-size: 36px;
+
+            font-weight: 500;
+
+            color: #c86f83;
+        }
+
+
+        .end-text {
+
+            margin-top: 20px;
+
+            color: #817477;
+        }
+
+
+        .restart-button {
+
+            margin-top: 40px;
+
+            padding: 12px 28px;
+
+            border: 1px solid #e5b8c1;
+
+            border-radius: 30px;
+
+            background: transparent;
+
+            color: #c9788b;
+
+            cursor: pointer;
+
+            font-family: inherit;
+
+            transition: 0.25s;
+        }
+
+
+        .restart-button:hover {
+
+            background: #fff0f3;
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        /* ==================================================
+           右側頁面指示器
+        ================================================== */
+
+        .page-indicator {
+
+            position: fixed;
+
+            top: 50%;
+
+            right: 25px;
+
+            transform:
+                translateY(-50%);
+
+            z-index: 100;
+        }
+
+
+        .indicator-dot {
+
+            display: block;
+
+            width: 8px;
+
+            height: 8px;
+
+            margin: 12px 0;
+
+            padding: 0;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #dfc3c9;
+
+            cursor: pointer;
+
+            transition:
+                all 0.3s ease;
+        }
+
+
+        .indicator-dot.active {
+
+            height: 22px;
+
+            border-radius: 5px;
+
+            background: #c9788b;
+        }
+
+
+        /* ==================================================
+           上一頁 / 下一頁
+        ================================================== */
+
+        .page-navigation {
+
+            position: fixed;
+
+            right: 18px;
+
+            bottom: 25px;
+
+            z-index: 100;
+
+            display: flex;
+
+            gap: 8px;
+        }
+
+
+        .nav-button {
+
+            width: 38px;
+
+            height: 38px;
+
+            border: 1px solid #ead1d6;
+
+            border-radius: 50%;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.8
+                );
+
+            color: #c9788b;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+
+        .nav-button:hover {
+
+            background: #fff0f3;
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        /* ==================================================
+           頁面進場動畫
+        ================================================== */
+
+        .animate-item {
+
+            opacity: 0;
+
+            transform:
+                translateY(25px);
+
+            transition:
+                opacity 0.8s ease,
+                transform 0.8s ease;
+        }
+
+
+        .story-page.active
+        .animate-item {
+
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+
+        .story-page.active
+        .delay-1 {
+
+            transition-delay:
+                0.15s;
+        }
+
+
+        .story-page.active
+        .delay-2 {
+
+            transition-delay:
+                0.3s;
+        }
+
+
+        .story-page.active
+        .delay-3 {
+
+            transition-delay:
+                0.45s;
+        }
+
+
+        .story-page.active
+        .delay-4 {
+
+            transition-delay:
+                0.6s;
+        }
+
+
+        /* ==================================================
+           手機
+        ================================================== */
 
         @media (max-width: 650px) {
 
-            .hero h1 {
-                font-size: 34px;
+            .story-page {
+
+                padding:
+                    30px 20px;
             }
 
+
+            .page-content {
+
+                max-height: 90vh;
+            }
+
+
+            .hero-heart {
+
+                font-size: 55px;
+            }
+
+
             .hero-description {
+
                 font-size: 16px;
             }
 
-            .section {
-                padding: 70px 20px;
+
+            .scroll-hint {
+
+                margin-top: 40px;
             }
 
-            .memory-grid {
-                grid-template-columns: 1fr;
+
+            .timeline {
+
+                max-width: 100%;
             }
+
 
             .timeline::before {
-                left: 10px;
+
+                left: 8px;
             }
 
+
             .timeline-item,
-            .timeline-item:nth-child(even),
-            .timeline-item:nth-child(odd) {
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
 
                 width: 100%;
 
                 left: 0;
 
-                padding-left: 40px;
-
-                padding-right: 10px;
+                padding:
+                    8px 10px 8px 30px;
 
                 text-align: left;
             }
+
 
             .timeline-item:nth-child(odd)
             .timeline-dot,
             .timeline-item:nth-child(even)
             .timeline-dot {
 
-                left: 4px;
+                left: 2px;
 
                 right: auto;
             }
 
-            .letter {
-                padding: 30px 25px;
+
+            .timeline-text {
+
+                font-size: 12px;
             }
+
+
+            .memory-grid {
+
+                grid-template-columns: 1fr;
+
+                gap: 12px;
+            }
+
+
+            .memory-card {
+
+                padding: 18px;
+            }
+
+
+            .memory-icon {
+
+                display: inline-block;
+
+                margin-right: 8px;
+            }
+
+
+            .letter {
+
+                padding:
+                    28px 22px;
+            }
+
+
+            .letter p {
+
+                font-size: 14px;
+            }
+
+
+            .page-indicator {
+
+                right: 12px;
+            }
+
+
+            .indicator-dot {
+
+                width: 6px;
+
+                height: 6px;
+
+                margin: 9px 0;
+            }
+
+
+            .indicator-dot.active {
+
+                height: 18px;
+            }
+
+
+            .page-navigation {
+
+                right: 12px;
+
+                bottom: 15px;
+            }
+
+
+            .nav-button {
+
+                width: 34px;
+
+                height: 34px;
+            }
+
         }
 
     </style>
 
 </head>
 
+
 <body>
 
 
-<!-- =========================================
-     Hero
-========================================= -->
+<!-- ==================================================
+     Page Indicator
+================================================== -->
 
-<section class="hero">
+<nav class="page-indicator">
 
-    <div class="hero-content">
+    <button
+        class="indicator-dot active"
+        data-index="0">
+    </button>
 
-        <div class="hero-heart">
-            ❤️
-        </div>
+    <button
+        class="indicator-dot"
+        data-index="1">
+    </button>
 
-        <h1>
-            給恩恩的小角落
-        </h1>
+    <button
+        class="indicator-dot"
+        data-index="2">
+    </button>
 
-        <p class="hero-description">
-            一個記錄我們點點滴滴的小地方。
-        </p>
+    <button
+        class="indicator-dot"
+        data-index="3">
+    </button>
 
-        <div class="hero-date">
-            2026 · Our little story
-        </div>
+    <button
+        class="indicator-dot"
+        data-index="4">
+    </button>
 
-        <div class="scroll-hint">
-            ↓ 往下看看我們的故事
-        </div>
+    <button
+        class="indicator-dot"
+        data-index="5">
+    </button>
 
-    </div>
-
-</section>
-
-
-<!-- =========================================
-     Intro
-========================================= -->
-
-<section class="section intro">
-
-    <h2 class="section-title">
-        我們的故事
-    </h2>
-
-    <p class="section-subtitle">
-        有些日子，會因為某個人而變得特別。
-    </p>
-
-    <p class="intro-text">
-        這裡沒有什麼特別偉大的故事，
-        只是想把那些一起聊天、一起吃飯、
-        一起走過的日子，好好留下來。
-    </p>
-
-    <div class="quote">
-
-        「也許我們還有很多故事沒有寫下來，
-        但沒關係，慢慢來就好了。」
-
-    </div>
-
-</section>
+</nav>
 
 
-<!-- =========================================
-     Timeline
-========================================= -->
+<!-- ==================================================
+     Page Navigation
+================================================== -->
 
-<section class="section">
+<div class="page-navigation">
 
-    <h2 class="section-title">
-        我們的時間軸
-    </h2>
+    <button
+        class="nav-button"
+        id="prevPage">
+        ↑
+    </button>
 
-    <p class="section-subtitle">
-        一點一點，把我們的故事串起來。
-    </p>
+    <button
+        class="nav-button"
+        id="nextPage">
+        ↓
+    </button>
+
+</div>
 
 
-    <div class="timeline">
+<!-- ==================================================
+     Story Container
+================================================== -->
 
-        <div class="timeline-item">
+<main class="story-container"
+      id="storyContainer">
 
-            <div class="timeline-dot"></div>
 
-            <div class="timeline-date">
-                2026 / 08
+    <!-- ==================================================
+         Page 01
+    ================================================== -->
+
+    <section
+        class="story-page page-hero active"
+        data-page="0">
+
+        <span class="background-heart heart-1">
+            ♡
+        </span>
+
+        <span class="background-heart heart-2">
+            ♡
+        </span>
+
+        <span class="background-heart heart-3">
+            ♡
+        </span>
+
+        <span class="background-heart heart-4">
+            ♡
+        </span>
+
+
+        <div class="page-content">
+
+            <div class="hero-heart animate-item">
+                ❤️
             </div>
 
-            <div class="timeline-title">
-                故事的開始
-            </div>
+            <h1 class="hero animate-item delay-1">
+                給恩恩的小角落
+            </h1>
 
-            <p class="timeline-text">
-                這裡可以寫下我們第一次認識、
-                第一次聊天的故事。
+            <p class="hero-description animate-item delay-2">
+                一個只屬於我們的小地方。
             </p>
 
+            <div class="hero-date animate-item delay-3">
+                2026 · Our little story
+            </div>
+
+            <div class="scroll-hint animate-item delay-4">
+                往下看看我們的故事
+
+                <div class="scroll-arrow">
+                    ↓
+                </div>
+            </div>
+
         </div>
 
+    </section>
 
-        <div class="timeline-item">
 
-            <div class="timeline-dot"></div>
+    <!-- ==================================================
+         Page 02
+    ================================================== -->
 
-            <div class="timeline-date">
-                2026 / 08
+    <section
+        class="story-page page-story"
+        data-page="1">
+
+        <div class="page-content">
+
+            <div class="chapter animate-item">
+                CHAPTER 01
             </div>
 
-            <div class="timeline-title">
-                第一次一起出去
-            </div>
+            <h2 class="section-title animate-item delay-1">
+                我們的故事
+            </h2>
 
-            <p class="timeline-text">
-                那一天發生了什麼，
-                可以慢慢記錄在這裡。
+            <p class="section-subtitle animate-item delay-2">
+                有些日子，會因為某個人而變得特別。
             </p>
 
-        </div>
-
-
-        <div class="timeline-item">
-
-            <div class="timeline-dot"></div>
-
-            <div class="timeline-date">
-                未來
-            </div>
-
-            <div class="timeline-title">
-                還沒寫下的故事
-            </div>
-
-            <p class="timeline-text">
-                因為我們的故事還在繼續。
+            <p class="story-text animate-item delay-2">
+                這裡沒有什麼特別偉大的故事，
+                只是想把那些一起聊天、一起吃飯、
+                一起走過的日子，好好留下來。
             </p>
 
-        </div>
+            <div class="quote animate-item delay-3">
 
-    </div>
+                「也許我們還有很多故事沒有寫下來，
+                但沒關係，慢慢來就好了。」
 
-</section>
-
-
-<!-- =========================================
-     Memories
-========================================= -->
-
-<section class="section">
-
-    <h2 class="section-title">
-        一些小小的回憶
-    </h2>
-
-    <p class="section-subtitle">
-        平凡的日子，也值得被記住。
-    </p>
-
-
-    <div class="memory-grid">
-
-        <div class="memory-card">
-
-            <div class="memory-icon">
-                🌷
             </div>
 
-            <h3>
-                那一天
-            </h3>
-
-            <p>
-                可以放一段特別的回憶，
-                或是一件只有我們知道的小事情。
-            </p>
-
         </div>
 
+    </section>
 
-        <div class="memory-card">
 
-            <div class="memory-icon">
-                ☕
+    <!-- ==================================================
+         Page 03
+    ================================================== -->
+
+    <section
+        class="story-page page-timeline"
+        data-page="2">
+
+        <div class="page-content">
+
+            <div class="chapter animate-item">
+                CHAPTER 02
             </div>
 
-            <h3>
-                一起度過的時間
-            </h3>
+            <h2 class="section-title animate-item delay-1">
+                我們走過的日子
+            </h2>
 
-            <p>
-                吃飯、聊天、散步，
-                其實每一個小時都很值得記錄。
+            <p class="section-subtitle animate-item delay-2">
+                一點一點，把我們的故事串起來。
             </p>
 
-        </div>
+
+            <div class="timeline animate-item delay-3">
 
 
-        <div class="memory-card">
+                <div class="timeline-item">
 
-            <div class="memory-icon">
-                📷
+                    <div class="timeline-dot"></div>
+
+                    <div class="timeline-date">
+                        2026 / 08
+                    </div>
+
+                    <div class="timeline-title">
+                        故事的開始
+                    </div>
+
+                    <p class="timeline-text">
+                        這裡可以寫下我們第一次認識、
+                        第一次聊天的故事。
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div class="timeline-date">
+                        2026 / 08
+                    </div>
+
+                    <div class="timeline-title">
+                        第一次一起出去
+                    </div>
+
+                    <p class="timeline-text">
+                        那一天發生了什麼，
+                        可以慢慢記錄在這裡。
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div class="timeline-date">
+                        未來
+                    </div>
+
+                    <div class="timeline-title">
+                        還沒寫下的故事
+                    </div>
+
+                    <p class="timeline-text">
+                        因為我們的故事還在繼續。
+                    </p>
+
+                </div>
+
+
             </div>
 
-            <h3>
-                想留下的照片
-            </h3>
-
-            <p>
-                之後可以把我們的照片
-                一張一張放進來。
-            </p>
-
         </div>
 
+    </section>
 
-        <div class="memory-card">
 
-            <div class="memory-icon">
-                💌
+    <!-- ==================================================
+         Page 04
+    ================================================== -->
+
+    <section
+        class="story-page page-memory"
+        data-page="3">
+
+        <div class="page-content">
+
+            <div class="chapter animate-item">
+                CHAPTER 03
             </div>
 
-            <h3>
-                想說的話
-            </h3>
+            <h2 class="section-title animate-item delay-1">
+                一些小小的回憶
+            </h2>
 
-            <p>
-                有些話平常不好意思說，
-                可以留在這裡。
+            <p class="section-subtitle animate-item delay-2">
+                平凡的日子，也值得被記住。
             </p>
 
+
+            <div class="memory-grid animate-item delay-3">
+
+
+                <div class="memory-card">
+
+                    <div class="memory-icon">
+                        🌷
+                    </div>
+
+                    <h3>
+                        那一天
+                    </h3>
+
+                    <p>
+                        一件只有我們知道的小事情。
+                    </p>
+
+                </div>
+
+
+                <div class="memory-card">
+
+                    <div class="memory-icon">
+                        ☕
+                    </div>
+
+                    <h3>
+                        一起度過的時間
+                    </h3>
+
+                    <p>
+                        吃飯、聊天、散步，
+                        都值得記住。
+                    </p>
+
+                </div>
+
+
+                <div class="memory-card">
+
+                    <div class="memory-icon">
+                        📷
+                    </div>
+
+                    <h3>
+                        想留下的照片
+                    </h3>
+
+                    <p>
+                        之後把我們的照片放進來。
+                    </p>
+
+                </div>
+
+
+                <div class="memory-card">
+
+                    <div class="memory-icon">
+                        💌
+                    </div>
+
+                    <h3>
+                        想說的話
+                    </h3>
+
+                    <p>
+                        有些話，可以留在這裡。
+                    </p>
+
+                </div>
+
+
+            </div>
+
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<!-- =========================================
-     Letter
-========================================= -->
+    <!-- ==================================================
+         Page 05
+    ================================================== -->
 
-<section class="section">
+    <section
+        class="story-page page-letter"
+        data-page="4">
 
-    <h2 class="section-title">
-        給恩恩
-    </h2>
+        <div class="page-content">
 
-    <p class="section-subtitle">
-        一封還在慢慢寫的信。
-    </p>
+            <div class="chapter animate-item">
+                CHAPTER 04
+            </div>
+
+            <h2 class="section-title animate-item delay-1">
+                給恩恩
+            </h2>
+
+            <p class="section-subtitle animate-item delay-2">
+                一封還在慢慢寫的信。
+            </p>
 
 
-    <div class="letter">
+            <div class="letter animate-item delay-3">
 
-        <p>
-            恩恩：
-        </p>
+                <p>
+                    恩恩：
+                </p>
 
-        <p>
-            我想做這個小網站，
-            不是因為覺得它需要多厲害，
-            而是想留下一個地方，
-            可以記錄一些我們一起經歷過的事情。
-        </p>
+                <p>
+                    我想做這個小網站，
+                    不是因為覺得它需要多厲害，
+                    而是想留下一個地方，
+                    可以記錄一些我們一起經歷過的事情。
+                </p>
 
-        <p>
-            也許以後回頭看的時候，
-            會覺得現在的我們很可愛。
-        </p>
+                <p>
+                    也許以後回頭看的時候，
+                    會覺得現在的我們很可愛。
+                </p>
 
-        <p>
-            所以就慢慢記錄吧。
-        </p>
+                <p>
+                    所以就慢慢記錄吧。
+                </p>
 
-        <div class="letter-sign">
-            — 給恩恩 ❤️
+                <div class="letter-sign">
+                    — 給恩恩 ❤️
+                </div>
+
+            </div>
+
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<!-- =========================================
-     Footer
-========================================= -->
+    <!-- ==================================================
+         Page 06
+    ================================================== -->
 
-<footer>
+    <section
+        class="story-page page-end"
+        data-page="5">
 
-    Made with ❤️
+        <div class="page-content">
 
-    <br>
+            <div class="end-heart animate-item">
+                ❤️
+            </div>
 
-    YuN · Our little story
+            <h2 class="end-title animate-item delay-1">
+                故事還沒有結束
+            </h2>
 
-</footer>
+            <p class="end-text animate-item delay-2">
+                因為我們還有很多日子，
+                可以慢慢寫下來。
+            </p>
+
+            <button
+                class="restart-button animate-item delay-3"
+                id="restartButton">
+
+                從第一頁開始
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<script>
+
+    /* ==================================================
+       基本設定
+    ================================================== */
+
+    const container =
+        document.getElementById(
+            "storyContainer"
+        );
+
+
+    const pages =
+        document.querySelectorAll(
+            ".story-page"
+        );
+
+
+    const indicators =
+        document.querySelectorAll(
+            ".indicator-dot"
+        );
+
+
+    let currentPage = 0;
+
+
+    /* ==================================================
+       切換頁面
+    ================================================== */
+
+    function goToPage(index) {
+
+        if (index < 0) {
+            index = 0;
+        }
+
+        if (index >= pages.length) {
+            index = pages.length - 1;
+        }
+
+
+        currentPage = index;
+
+
+        pages[index].scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+
+        updateIndicator(index);
+    }
+
+
+    /* ==================================================
+       更新右側指示器
+    ================================================== */
+
+    function updateIndicator(index) {
+
+        indicators.forEach(
+            (indicator, i) => {
+
+                indicator.classList.toggle(
+                    "active",
+                    i === index
+                );
+
+            }
+        );
+
+    }
+
+
+    /* ==================================================
+       監聽目前頁面
+    ================================================== */
+
+    const observer =
+        new IntersectionObserver(
+            (entries) => {
+
+                entries.forEach(
+                    entry => {
+
+                        if (
+                            entry.isIntersecting &&
+                            entry.intersectionRatio >= 0.6
+                        ) {
+
+                            const index =
+                                Number(
+                                    entry
+                                        .target
+                                        .dataset
+                                        .page
+                                );
+
+                            currentPage =
+                                index;
+
+                            updateIndicator(
+                                index
+                            );
+
+                            entry
+                                .target
+                                .classList
+                                .add(
+                                    "active"
+                                );
+                        }
+
+                    }
+                );
+
+            },
+            {
+                root: container,
+
+                threshold: 0.6
+            }
+        );
+
+
+    pages.forEach(page => {
+
+        observer.observe(page);
+
+    });
+
+
+    /* ==================================================
+       右側頁面指示器
+    ================================================== */
+
+    indicators.forEach(
+        indicator => {
+
+            indicator.addEventListener(
+                "click",
+                () => {
+
+                    const index =
+                        Number(
+                            indicator
+                                .dataset
+                                .index
+                        );
+
+                    goToPage(index);
+
+                }
+            );
+
+        }
+    );
+
+
+    /* ==================================================
+       上一頁
+    ================================================== */
+
+    document
+        .getElementById("prevPage")
+        .addEventListener(
+            "click",
+            () => {
+
+                goToPage(
+                    currentPage - 1
+                );
+
+            }
+        );
+
+
+    /* ==================================================
+       下一頁
+    ================================================== */
+
+    document
+        .getElementById("nextPage")
+        .addEventListener(
+            "click",
+            () => {
+
+                goToPage(
+                    currentPage + 1
+                );
+
+            }
+        );
+
+
+    /* ==================================================
+       重新開始
+    ================================================== */
+
+    document
+        .getElementById("restartButton")
+        .addEventListener(
+            "click",
+            () => {
+
+                goToPage(0);
+
+            }
+        );
+
+
+    /* ==================================================
+       滑鼠滾輪
+       
+       避免一次滑過好幾頁
+    ================================================== */
+
+    let wheelLocked = false;
+
+
+    container.addEventListener(
+        "wheel",
+        event => {
+
+            if (wheelLocked) {
+
+                event.preventDefault();
+
+                return;
+            }
+
+
+            if (
+                Math.abs(event.deltaY) < 10
+            ) {
+                return;
+            }
+
+
+            event.preventDefault();
+
+
+            wheelLocked = true;
+
+
+            if (event.deltaY > 0) {
+
+                goToPage(
+                    currentPage + 1
+                );
+
+            } else {
+
+                goToPage(
+                    currentPage - 1
+                );
+
+            }
+
+
+            setTimeout(
+                () => {
+
+                    wheelLocked = false;
+
+                },
+                750
+            );
+
+        },
+        {
+            passive: false
+        }
+    );
+
+
+    /* ==================================================
+       鍵盤操作
+    ================================================== */
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key === "ArrowDown" ||
+                event.key === "PageDown"
+            ) {
+
+                goToPage(
+                    currentPage + 1
+                );
+
+            }
+
+
+            if (
+                event.key === "ArrowUp" ||
+                event.key === "PageUp"
+            ) {
+
+                goToPage(
+                    currentPage - 1
+                );
+
+            }
+
+        }
+    );
+
+
+    /* ==================================================
+       初始化
+    ================================================== */
+
+    updateIndicator(0);
+
+</script>
 
 
 </body>
