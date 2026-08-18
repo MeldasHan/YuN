@@ -10,150 +10,451 @@
     <title>給恩恩的小角落 ❤️</title>
 
     <style>
+
+        /* ========================================
+           基本設定
+        ======================================== */
+
         * {
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             margin: 0;
-            min-height: 100vh;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
 
             font-family:
                 "Noto Sans TC",
                 "Microsoft JhengHei",
                 sans-serif;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #fff5f7,
-                    #ffe9ef
-                );
+            background: #fffaf9;
 
-            color: #555;
+            color: #5f5557;
+
+            line-height: 1.8;
         }
 
-        .container {
-            width: min(90%, 420px);
-            padding: 45px 30px;
+
+        /* ========================================
+           共用
+        ======================================== */
+
+        .section {
+            max-width: 900px;
+
+            margin: 0 auto;
+
+            padding: 90px 25px;
+        }
+
+        .section-title {
+            margin: 0 0 12px;
 
             text-align: center;
 
-            background: rgba(255, 255, 255, 0.9);
-
-            border-radius: 24px;
-
-            box-shadow:
-                0 15px 40px rgba(0, 0, 0, 0.08);
-        }
-
-        .heart {
-            font-size: 60px;
-            margin-bottom: 15px;
-        }
-
-        h1 {
-            margin: 0 0 10px;
-
             font-size: 28px;
-            font-weight: 600;
 
-            color: #d96b83;
+            font-weight: 500;
+
+            color: #c9788b;
         }
 
-        .subtitle {
-            margin-bottom: 30px;
+        .section-subtitle {
+            margin: 0 0 50px;
 
-            color: #888;
-            line-height: 1.7;
+            text-align: center;
+
+            font-size: 14px;
+
+            color: #a99b9e;
         }
 
-        .password-input {
-            width: 100%;
 
-            padding: 13px 16px;
+        /* ========================================
+           Hero
+        ======================================== */
 
-            border: 1px solid #ead3d9;
-            border-radius: 12px;
+        .hero {
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            text-align: center;
+
+            padding: 30px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #fff4f5 0%,
+                    #fffaf9 100%
+                );
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .hero-heart {
+            margin-bottom: 20px;
+
+            font-size: 60px;
+        }
+
+        .hero h1 {
+            margin: 0;
+
+            font-size: 42px;
+
+            font-weight: 500;
+
+            color: #c86f83;
+        }
+
+        .hero-description {
+            margin-top: 20px;
+
+            font-size: 18px;
+
+            color: #817477;
+        }
+
+        .hero-date {
+            margin-top: 35px;
+
+            font-size: 13px;
+
+            color: #b2a4a7;
+        }
+
+        .scroll-hint {
+            margin-top: 60px;
+
+            font-size: 13px;
+
+            color: #b8a8ac;
+        }
+
+
+        /* ========================================
+           Intro
+        ======================================== */
+
+        .intro {
+            text-align: center;
+        }
+
+        .intro-text {
+            max-width: 600px;
+
+            margin: 0 auto;
+
+            font-size: 17px;
+
+            color: #75696c;
+        }
+
+        .quote {
+            margin-top: 45px;
+
+            padding: 25px;
+
+            border-left: 3px solid #e9b7c2;
+
+            background: #fff5f6;
+
+            text-align: left;
 
             font-size: 16px;
 
-            outline: none;
-
-            transition: 0.2s;
+            color: #7d7073;
         }
 
-        .password-input:focus {
-            border-color: #d96b83;
+
+        /* ========================================
+           Timeline
+        ======================================== */
+
+        .timeline {
+            position: relative;
+
+            max-width: 650px;
+
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: "";
+
+            position: absolute;
+
+            left: 50%;
+
+            top: 0;
+
+            bottom: 0;
+
+            width: 1px;
+
+            background: #ead6da;
+
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+
+            width: 50%;
+
+            padding: 20px 40px;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-dot {
+            position: absolute;
+
+            top: 30px;
+
+            width: 12px;
+
+            height: 12px;
+
+            border-radius: 50%;
+
+            background: #d98a9b;
+
+            border: 3px solid #fffaf9;
 
             box-shadow:
-                0 0 0 3px rgba(217, 107, 131, 0.1);
+                0 0 0 1px #e7c4cb;
         }
 
-        .login-button {
-            width: 100%;
+        .timeline-item:nth-child(odd)
+        .timeline-dot {
+            right: -6px;
+        }
 
-            margin-top: 15px;
+        .timeline-item:nth-child(even)
+        .timeline-dot {
+            left: -6px;
+        }
 
-            padding: 13px;
+        .timeline-date {
+            font-size: 13px;
 
-            border: none;
-            border-radius: 12px;
+            color: #c48694;
+        }
 
-            background: #d96b83;
-            color: white;
+        .timeline-title {
+            margin: 5px 0;
+
+            font-size: 18px;
+
+            font-weight: 500;
+
+            color: #6d5d61;
+        }
+
+        .timeline-text {
+            margin: 0;
+
+            font-size: 14px;
+
+            color: #95888b;
+        }
+
+
+        /* ========================================
+           Memory Cards
+        ======================================== */
+
+        .memory-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 25px;
+        }
+
+        .memory-card {
+            padding: 30px;
+
+            background: white;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 8px 30px rgba(80, 50, 60, 0.06);
+        }
+
+        .memory-icon {
+            font-size: 30px;
+
+            margin-bottom: 10px;
+        }
+
+        .memory-card h3 {
+            margin: 0 0 8px;
+
+            font-size: 18px;
+
+            font-weight: 500;
+
+            color: #6d5d61;
+        }
+
+        .memory-card p {
+            margin: 0;
+
+            font-size: 14px;
+
+            color: #95888b;
+        }
+
+
+        /* ========================================
+           Letter
+        ======================================== */
+
+        .letter {
+            max-width: 650px;
+
+            margin: 0 auto;
+
+            padding: 45px;
+
+            background: #fff;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 8px 30px rgba(80, 50, 60, 0.05);
+        }
+
+        .letter p {
+            margin: 0 0 18px;
 
             font-size: 16px;
 
-            cursor: pointer;
-
-            transition: 0.2s;
+            color: #75696c;
         }
 
-        .login-button:hover {
-            transform: translateY(-1px);
-            opacity: 0.9;
+        .letter-sign {
+            margin-top: 30px;
+
+            text-align: right;
+
+            color: #c9788b;
         }
 
-        .error-message {
-            min-height: 24px;
 
-            margin-top: 15px;
+        /* ========================================
+           Footer
+        ======================================== */
 
-            color: #d96b83;
-            font-size: 14px;
+        footer {
+            padding: 50px 20px;
+
+            text-align: center;
+
+            background: #fff2f4;
+
+            color: #aa9298;
+
+            font-size: 13px;
         }
 
-        .hint {
-            margin-top: 25px;
 
-            font-size: 12px;
-            color: #aaa;
+        /* ========================================
+           RWD
+        ======================================== */
+
+        @media (max-width: 650px) {
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+            .section {
+                padding: 70px 20px;
+            }
+
+            .memory-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 10px;
+            }
+
+            .timeline-item,
+            .timeline-item:nth-child(even),
+            .timeline-item:nth-child(odd) {
+
+                width: 100%;
+
+                left: 0;
+
+                padding-left: 40px;
+
+                padding-right: 10px;
+
+                text-align: left;
+            }
+
+            .timeline-item:nth-child(odd)
+            .timeline-dot,
+            .timeline-item:nth-child(even)
+            .timeline-dot {
+
+                left: 4px;
+
+                right: auto;
+            }
+
+            .letter {
+                padding: 30px 25px;
+            }
         }
 
-        /* =========================
-           登入成功後的內容
-        ========================= */
-
-        #main-content {
-            display: none;
-        }
     </style>
+
 </head>
 
 <body>
 
-    <!-- =========================
-         密碼入口
-    ========================== -->
 
-    <main class="container" id="login-page">
+<!-- =========================================
+     Hero
+========================================= -->
 
-        <div class="heart">
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-heart">
             ❤️
         </div>
 
@@ -161,117 +462,286 @@
             給恩恩的小角落
         </h1>
 
-        <p class="subtitle">
-            這裡有一些只想和你分享的故事。
+        <p class="hero-description">
+            一個記錄我們點點滴滴的小地方。
         </p>
 
-        <input
-            type="password"
-            id="password"
-            class="password-input"
-            placeholder="請輸入密碼"
-            autocomplete="off"
-        >
-
-        <button
-            type="button"
-            class="login-button"
-            onclick="login()"
-        >
-            進入
-        </button>
-
-        <div
-            id="error-message"
-            class="error-message"
-        ></div>
-
-        <div class="hint">
-            一個只有我們知道的小秘密
+        <div class="hero-date">
+            2026 · Our little story
         </div>
 
-    </main>
-
-
-    <!-- =========================
-         登入成功
-    ========================== -->
-
-    <main class="container" id="main-content">
-
-        <div class="heart">
-            💕
+        <div class="scroll-hint">
+            ↓ 往下看看我們的故事
         </div>
 
-        <h1>
-            歡迎回來，恩恩
-        </h1>
+    </div>
 
-        <p class="subtitle">
-            這裡會慢慢記錄屬於我們的故事。
+</section>
+
+
+<!-- =========================================
+     Intro
+========================================= -->
+
+<section class="section intro">
+
+    <h2 class="section-title">
+        我們的故事
+    </h2>
+
+    <p class="section-subtitle">
+        有些日子，會因為某個人而變得特別。
+    </p>
+
+    <p class="intro-text">
+        這裡沒有什麼特別偉大的故事，
+        只是想把那些一起聊天、一起吃飯、
+        一起走過的日子，好好留下來。
+    </p>
+
+    <div class="quote">
+
+        「也許我們還有很多故事沒有寫下來，
+        但沒關係，慢慢來就好了。」
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     Timeline
+========================================= -->
+
+<section class="section">
+
+    <h2 class="section-title">
+        我們的時間軸
+    </h2>
+
+    <p class="section-subtitle">
+        一點一點，把我們的故事串起來。
+    </p>
+
+
+    <div class="timeline">
+
+        <div class="timeline-item">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-date">
+                2026 / 08
+            </div>
+
+            <div class="timeline-title">
+                故事的開始
+            </div>
+
+            <p class="timeline-text">
+                這裡可以寫下我們第一次認識、
+                第一次聊天的故事。
+            </p>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-date">
+                2026 / 08
+            </div>
+
+            <div class="timeline-title">
+                第一次一起出去
+            </div>
+
+            <p class="timeline-text">
+                那一天發生了什麼，
+                可以慢慢記錄在這裡。
+            </p>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-date">
+                未來
+            </div>
+
+            <div class="timeline-title">
+                還沒寫下的故事
+            </div>
+
+            <p class="timeline-text">
+                因為我們的故事還在繼續。
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     Memories
+========================================= -->
+
+<section class="section">
+
+    <h2 class="section-title">
+        一些小小的回憶
+    </h2>
+
+    <p class="section-subtitle">
+        平凡的日子，也值得被記住。
+    </p>
+
+
+    <div class="memory-grid">
+
+        <div class="memory-card">
+
+            <div class="memory-icon">
+                🌷
+            </div>
+
+            <h3>
+                那一天
+            </h3>
+
+            <p>
+                可以放一段特別的回憶，
+                或是一件只有我們知道的小事情。
+            </p>
+
+        </div>
+
+
+        <div class="memory-card">
+
+            <div class="memory-icon">
+                ☕
+            </div>
+
+            <h3>
+                一起度過的時間
+            </h3>
+
+            <p>
+                吃飯、聊天、散步，
+                其實每一個小時都很值得記錄。
+            </p>
+
+        </div>
+
+
+        <div class="memory-card">
+
+            <div class="memory-icon">
+                📷
+            </div>
+
+            <h3>
+                想留下的照片
+            </h3>
+
+            <p>
+                之後可以把我們的照片
+                一張一張放進來。
+            </p>
+
+        </div>
+
+
+        <div class="memory-card">
+
+            <div class="memory-icon">
+                💌
+            </div>
+
+            <h3>
+                想說的話
+            </h3>
+
+            <p>
+                有些話平常不好意思說，
+                可以留在這裡。
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     Letter
+========================================= -->
+
+<section class="section">
+
+    <h2 class="section-title">
+        給恩恩
+    </h2>
+
+    <p class="section-subtitle">
+        一封還在慢慢寫的信。
+    </p>
+
+
+    <div class="letter">
+
+        <p>
+            恩恩：
         </p>
 
         <p>
-            🌸 我們的故事，才正開始。
+            我想做這個小網站，
+            不是因為覺得它需要多厲害，
+            而是想留下一個地方，
+            可以記錄一些我們一起經歷過的事情。
         </p>
 
-    </main>
+        <p>
+            也許以後回頭看的時候，
+            會覺得現在的我們很可愛。
+        </p>
+
+        <p>
+            所以就慢慢記錄吧。
+        </p>
+
+        <div class="letter-sign">
+            — 給恩恩 ❤️
+        </div>
+
+    </div>
+
+</section>
 
 
-    <script>
+<!-- =========================================
+     Footer
+========================================= -->
 
-        // =========================
-        // 密碼
-        // =========================
+<footer>
 
-        const PASSWORD = "enen";
+    Made with ❤️
 
+    <br>
 
-        // =========================
-        // 登入
-        // =========================
+    YuN · Our little story
 
-        function login() {
+</footer>
 
-            const password =
-                document.getElementById("password").value;
-
-            const errorMessage =
-                document.getElementById("error-message");
-
-            if (password === PASSWORD) {
-
-                document.getElementById("login-page")
-                    .style.display = "none";
-
-                document.getElementById("main-content")
-                    .style.display = "block";
-
-            } else {
-
-                errorMessage.textContent =
-                    "密碼不對喔，再想一下 ❤️";
-
-            }
-
-        }
-
-
-        // =========================
-        // Enter 登入
-        // =========================
-
-        document
-            .getElementById("password")
-            .addEventListener("keydown", function(event) {
-
-                if (event.key === "Enter") {
-                    login();
-                }
-
-            });
-
-    </script>
 
 </body>
 
