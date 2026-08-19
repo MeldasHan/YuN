@@ -950,6 +950,329 @@
                 0.6s;
         }
 
+		/* ==================================================
+		   Password Screen
+		================================================== */
+
+		.password-screen {
+
+			position: fixed;
+
+			inset: 0;
+
+			z-index: 9999;
+
+			display: flex;
+
+			justify-content: center;
+
+			align-items: center;
+
+			padding: 25px;
+
+			background:
+				linear-gradient(
+					180deg,
+					#fff1f4 0%,
+					#fffaf9 100%
+				);
+
+			transition:
+				opacity 0.8s ease,
+				visibility 0.8s ease;
+		}
+
+
+		.password-screen.hidden {
+
+			opacity: 0;
+
+			visibility: hidden;
+
+			pointer-events: none;
+		}
+
+
+		/* 背景淡淡的心 */
+
+		.password-screen::before {
+
+			content: "♡";
+
+			position: absolute;
+
+			top: 15%;
+
+			left: 15%;
+
+			font-size: 35px;
+
+			color: #d98a9b;
+
+			opacity: 0.15;
+
+			animation:
+				floatHeart 6s ease-in-out infinite;
+		}
+
+
+		.password-screen::after {
+
+			content: "♡";
+
+			position: absolute;
+
+			right: 15%;
+
+			bottom: 18%;
+
+			font-size: 28px;
+
+			color: #d98a9b;
+
+			opacity: 0.15;
+
+			animation:
+				floatHeart 6s ease-in-out infinite;
+
+			animation-delay: 1.5s;
+		}
+
+
+		/* ==================================================
+		   Password Box
+		================================================== */
+
+		.password-box {
+
+			position: relative;
+
+			z-index: 2;
+
+			width: min(
+				420px,
+				100%
+			);
+
+			padding: 45px 35px;
+
+			text-align: center;
+
+			background:
+				rgba(
+					255,
+					255,
+					255,
+					0.88
+				);
+
+			border-radius: 24px;
+
+			box-shadow:
+				0 15px 50px
+				rgba(
+					80,
+					50,
+					60,
+					0.08
+				);
+		}
+
+
+		/* 愛心 */
+
+		.password-heart {
+
+			margin-bottom: 12px;
+
+			font-size: 48px;
+
+			animation:
+				heartBeat 2.5s ease-in-out infinite;
+		}
+
+
+		/* 英文小標 */
+
+		.password-label {
+
+			margin-bottom: 8px;
+
+			font-size: 10px;
+
+			letter-spacing: 3px;
+
+			color: #c48694;
+		}
+
+
+		/* 標題 */
+
+		.password-box h1 {
+
+			margin: 0;
+
+			font-size: 32px;
+
+			font-weight: 500;
+
+			letter-spacing: 3px;
+
+			color: #c86f83;
+		}
+
+
+		/* 說明 */
+
+		.password-box p {
+
+			margin: 12px 0 25px;
+
+			font-size: 14px;
+
+			color: #95888b;
+		}
+
+
+		/* ==================================================
+		   Input
+		================================================== */
+
+		.password-input-group {
+
+			display: flex;
+
+			flex-direction: column;
+
+			gap: 10px;
+		}
+
+
+		.password-input-group input {
+
+			width: 100%;
+
+			height: 46px;
+
+			padding: 0 16px;
+
+			border:
+				1px solid #ead1d6;
+
+			border-radius: 12px;
+
+			outline: none;
+
+			background: #fffaf9;
+
+			color: #6d5d61;
+
+			font-family: inherit;
+
+			font-size: 14px;
+
+			text-align: center;
+
+			transition:
+				border-color 0.25s ease,
+				box-shadow 0.25s ease;
+		}
+
+
+		.password-input-group input:focus {
+
+			border-color: #d98a9b;
+
+			box-shadow:
+				0 0 0 3px
+				rgba(
+					217,
+					138,
+					155,
+					0.12
+				);
+		}
+
+
+		.password-input-group button {
+
+			height: 46px;
+
+			border: none;
+
+			border-radius: 12px;
+
+			background: #c9788b;
+
+			color: white;
+
+			cursor: pointer;
+
+			font-family: inherit;
+
+			font-size: 14px;
+
+			transition:
+				background 0.25s ease,
+				transform 0.25s ease;
+		}
+
+
+		.password-input-group button:hover {
+
+			background: #bd687d;
+
+			transform:
+				translateY(-2px);
+		}
+
+
+		/* ==================================================
+		   錯誤訊息
+		================================================== */
+
+		.password-error {
+
+			margin-top: 12px;
+
+			font-size: 12px;
+
+			color: #c9788b;
+
+			opacity: 0;
+
+			transform:
+				translateY(-5px);
+
+			transition:
+				opacity 0.25s ease,
+				transform 0.25s ease;
+		}
+
+
+		.password-error.show {
+
+			opacity: 1;
+
+			transform:
+				translateY(0);
+		}
+
+
+		/* ==================================================
+		   Footer Hint
+		================================================== */
+
+		.password-hint {
+
+			margin-top: 28px;
+
+			font-size: 10px;
+
+			letter-spacing: 2px;
+
+			color: #c9b7bb;
+		}
 
         /* ==================================================
            手機
@@ -1194,9 +1517,64 @@
 
 </head>
 
-
+@
 <body>
+<!-- ==================================================
+     密碼入口
+================================================== -->
 
+<div class="password-screen" id="passwordScreen">
+
+    <div class="password-box">
+
+        <div class="password-heart">
+            ❤️
+        </div>
+
+        <div class="password-label">
+            A LITTLE PLACE FOR US
+        </div>
+
+        <h1>
+            給恩恩
+        </h1>
+
+        <p>
+            這是一個只屬於我們的小角落。
+        </p>
+
+        <div class="password-input-group">
+
+            <input
+                type="password"
+                id="passwordInput"
+                placeholder="輸入密碼"
+                autocomplete="off">
+
+            <button
+                id="passwordButton">
+
+                進入 ❤️
+
+            </button>
+
+        </div>
+
+        <div
+            class="password-error"
+            id="passwordError">
+
+            密碼好像不對，再試一次看看。
+
+        </div>
+
+        <div class="password-hint">
+            Only for us.
+        </div>
+
+    </div>
+
+</div>
 
 <!-- ==================================================
      Page Indicator
@@ -1652,6 +2030,96 @@
 
 
 <script>
+	/* ==================================================
+	   密碼入口
+	================================================== */
+
+	const PASSWORD = "恩恩";
+
+	const passwordScreen =
+		document.getElementById(
+			"passwordScreen"
+		);
+
+	const passwordInput =
+		document.getElementById(
+			"passwordInput"
+		);
+
+	const passwordButton =
+		document.getElementById(
+			"passwordButton"
+		);
+
+	const passwordError =
+		document.getElementById(
+			"passwordError"
+		);
+
+
+	function checkPassword() {
+
+		const password =
+			passwordInput.value.trim();
+
+
+		if (password === PASSWORD) {
+
+			passwordError.classList.remove(
+				"show"
+			);
+
+			passwordScreen.classList.add(
+				"hidden"
+			);
+
+			// 讓網站回到第一頁
+			container.scrollTo({
+				top: 0,
+				behavior: "instant"
+			});
+
+			currentPage = 0;
+
+			updateIndicator(0);
+
+		} else {
+
+			passwordError.classList.add(
+				"show"
+			);
+
+			passwordInput.value = "";
+
+			passwordInput.focus();
+
+		}
+
+	}
+
+
+	/* 按鈕 */
+
+	passwordButton.addEventListener(
+		"click",
+		checkPassword
+	);
+
+
+	/* Enter */
+
+	passwordInput.addEventListener(
+		"keydown",
+		event => {
+
+			if (event.key === "Enter") {
+
+				checkPassword();
+
+			}
+
+		}
+	);
 
     /* ==================================================
        基本設定
