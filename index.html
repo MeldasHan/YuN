@@ -1,1703 +1,727 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>給恩恩的小角落 ❤️</title>
 
-
     <style>
+        * { box-sizing: border-box; }
 
-        /* ==================================================
-           基本設定
-        ================================================== */
-
-        * {
-            box-sizing: border-box;
-        }
-
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        html { scroll-behavior: smooth; }
 
         body {
             margin: 0;
-
-            font-family:
-                "Noto Sans TC",
-                "Microsoft JhengHei",
-                sans-serif;
-
+            font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
             background: #fffaf9;
-
             color: #5f5557;
-
             line-height: 1.8;
-
             overflow: hidden;
         }
 
-
-        /* ==================================================
-           整個故事容器
-        ================================================== */
-
         .story-container {
-
             width: 100vw;
-
             height: 100vh;
-
             overflow-y: auto;
-
             overflow-x: hidden;
-
             scroll-snap-type: y mandatory;
-
             scroll-behavior: smooth;
-
             scrollbar-width: none;
         }
 
-
-        .story-container::-webkit-scrollbar {
-            display: none;
-        }
-
-
-        /* ==================================================
-           每一頁
-        ================================================== */
+        .story-container::-webkit-scrollbar { display: none; }
 
         .story-page {
-
             position: relative;
-
             width: 100%;
-
             min-height: 100vh;
-
             height: 100vh;
-
             display: flex;
-
             justify-content: center;
-
             align-items: center;
-
             scroll-snap-align: start;
-
             scroll-snap-stop: always;
-
             overflow: hidden;
-
             padding: 40px 25px;
         }
 
-
         .page-content {
-
             width: min(900px, 100%);
-
             max-height: 90vh;
-
             overflow: visible;
-
             text-align: center;
-
             position: relative;
-
             z-index: 2;
         }
 
-
-        /* ==================================================
-           頁面背景
-        ================================================== */
-
-        .page-hero {
-
-            background:
-                linear-gradient(
-                    180deg,
-                    #fff1f4 0%,
-                    #fffaf9 100%
-                );
-        }
-
-
-        .page-story {
-
-            background:
-                linear-gradient(
-                    180deg,
-                    #fffaf9 0%,
-                    #fff6f7 100%
-                );
-        }
-
-
-        .page-timeline {
-
-            background:
-                linear-gradient(
-                    180deg,
-                    #fff7f8 0%,
-                    #fffaf9 100%
-                );
-        }
-
-
-        .page-memory {
-
-            background:
-                linear-gradient(
-                    180deg,
-                    #fffaf9 0%,
-                    #fff4f5 100%
-                );
-        }
-
-
-        .page-letter {
-
-            background:
-                linear-gradient(
-                    180deg,
-                    #fff4f6 0%,
-                    #fffaf9 100%
-                );
-        }
-
-
-        .page-end {
-
-            background:
-                linear-gradient(
-                    180deg,
-                    #fff0f3 0%,
-                    #fff8f9 100%
-                );
-        }
-
-
-        /* ==================================================
-           背景裝飾
-        ================================================== */
+        .page-hero { background: linear-gradient(180deg, #fff1f4 0%, #fffaf9 100%); }
+        .page-story { background: linear-gradient(180deg, #fffaf9 0%, #fff6f7 100%); }
+        .page-timeline { background: linear-gradient(180deg, #fff7f8 0%, #fffaf9 100%); }
+        .page-memory { background: linear-gradient(180deg, #fffaf9 0%, #fff4f5 100%); }
+        .page-letter { background: linear-gradient(180deg, #fff4f6 0%, #fffaf9 100%); }
+        .page-end { background: linear-gradient(180deg, #fff0f3 0%, #fff8f9 100%); }
 
         .background-heart {
-
             position: absolute;
-
             font-size: 25px;
-
             opacity: 0.18;
-
-            animation:
-                floatHeart 6s ease-in-out infinite;
+            animation: floatHeart 6s ease-in-out infinite;
         }
 
-
-        .heart-1 {
-            top: 15%;
-            left: 15%;
-        }
-
-
-        .heart-2 {
-            top: 25%;
-            right: 18%;
-
-            font-size: 18px;
-
-            animation-delay: 1s;
-        }
-
-
-        .heart-3 {
-            bottom: 18%;
-            left: 25%;
-
-            font-size: 16px;
-
-            animation-delay: 2s;
-        }
-
-
-        .heart-4 {
-            bottom: 25%;
-            right: 20%;
-
-            font-size: 30px;
-
-            animation-delay: 3s;
-        }
-
+        .heart-1 { top: 15%; left: 15%; }
+        .heart-2 { top: 25%; right: 18%; font-size: 18px; animation-delay: 1s; }
+        .heart-3 { bottom: 18%; left: 25%; font-size: 16px; animation-delay: 2s; }
+        .heart-4 { bottom: 25%; right: 20%; font-size: 30px; animation-delay: 3s; }
 
         @keyframes floatHeart {
-
-            0%,
-            100% {
-                transform:
-                    translateY(0)
-                    rotate(0deg);
-            }
-
-            50% {
-                transform:
-                    translateY(-15px)
-                    rotate(5deg);
-            }
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
         }
-
-
-        /* ==================================================
-           Hero
-        ================================================== */
 
         .hero-heart {
-
             margin-bottom: 20px;
-
             font-size: 68px;
-
-            animation:
-                heartBeat 2.5s ease-in-out infinite;
+            animation: heartBeat 2.5s ease-in-out infinite;
         }
-
 
         @keyframes heartBeat {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.08);
-            }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
         }
 
-
         .hero h1 {
-
             margin: 0;
-
-            font-size: clamp(
-                34px,
-                5vw,
-                48px
-            );
-
+            font-size: clamp(34px, 5vw, 48px);
             font-weight: 500;
-
             letter-spacing: 3px;
-
             color: #c86f83;
         }
 
-
         .hero-description {
-
             margin-top: 20px;
-
             font-size: 18px;
-
             color: #817477;
         }
 
-
         .hero-date {
-
             margin-top: 30px;
-
             font-size: 13px;
-
             letter-spacing: 2px;
-
             color: #b2a4a7;
         }
 
-
         .scroll-hint {
-
             margin-top: 55px;
-
             color: #b8a8ac;
-
             font-size: 13px;
         }
 
-
         .scroll-arrow {
-
             margin-top: 8px;
-
             font-size: 20px;
-
-            animation:
-                arrowMove 1.8s ease-in-out infinite;
+            animation: arrowMove 1.8s ease-in-out infinite;
         }
-
 
         @keyframes arrowMove {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(8px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
         }
 
-
-        /* ==================================================
-           Chapter
-        ================================================== */
-
         .chapter {
-
             margin-bottom: 15px;
-
             font-size: 12px;
-
             letter-spacing: 4px;
-
             color: #c48694;
         }
 
-
         .section-title {
-
             margin: 0 0 15px;
-
-            font-size: clamp(
-                28px,
-                4vw,
-                38px
-            );
-
+            font-size: clamp(28px, 4vw, 38px);
             font-weight: 500;
-
             color: #c9788b;
         }
 
-
         .section-subtitle {
-
             margin: 0 auto 35px;
-
             font-size: 15px;
-
             color: #a99b9e;
         }
 
-
-        /* ==================================================
-           Story
-        ================================================== */
-
         .story-text {
-
-            max-width: 600px;
-
+            max-width: 650px;
             margin: 0 auto;
-
             font-size: 17px;
-
             color: #75696c;
         }
 
-
         .quote {
-
-            max-width: 600px;
-
-            margin: 40px auto 0;
-
+            max-width: 650px;
+            margin: 35px auto 0;
             padding: 25px 30px;
-
             border-left: 3px solid #e9b7c2;
-
-            background: rgba(
-                255,
-                245,
-                246,
-                0.8
-            );
-
+            background: rgba(255, 245, 246, 0.8);
             text-align: left;
-
             font-size: 16px;
-
             color: #7d7073;
         }
 
-
-        /* ==================================================
-           Timeline
-        ================================================== */
-
+        /* ===== Timeline ===== */
         .timeline {
-
             position: relative;
-
-            max-width: 650px;
-
+            max-width: 720px;
             margin: 0 auto;
-
             text-align: left;
         }
 
-
         .timeline::before {
-
             content: "";
-
             position: absolute;
-
             left: 50%;
-
             top: 0;
-
             bottom: 0;
-
             width: 1px;
-
             background: #ead6da;
-
-            transform:
-                translateX(-50%);
+            transform: translateX(-50%);
         }
-
 
         .timeline-item {
-
             position: relative;
-
             width: 50%;
-
-            padding: 10px 35px;
-
-            margin-bottom: 10px;
+            padding: 8px 35px;
+            margin-bottom: 5px;
         }
 
-
         .timeline-item:nth-child(odd) {
-
             left: 0;
-
             text-align: right;
         }
 
-
-        .timeline-item:nth-child(even) {
-
-            left: 50%;
-        }
-
+        .timeline-item:nth-child(even) { left: 50%; }
 
         .timeline-dot {
-
             position: absolute;
-
             top: 20px;
-
             width: 12px;
-
             height: 12px;
-
             border-radius: 50%;
-
             background: #d98a9b;
-
             border: 3px solid #fffaf9;
-
-            box-shadow:
-                0 0 0 1px #e7c4cb;
+            box-shadow: 0 0 0 1px #e7c4cb;
         }
 
-
-        .timeline-item:nth-child(odd)
-        .timeline-dot {
-
-            right: -6px;
-        }
-
-
-        .timeline-item:nth-child(even)
-        .timeline-dot {
-
-            left: -6px;
-        }
-
+        .timeline-item:nth-child(odd) .timeline-dot { right: -6px; }
+        .timeline-item:nth-child(even) .timeline-dot { left: -6px; }
 
         .timeline-date {
-
             font-size: 12px;
-
             color: #c48694;
         }
 
-
         .timeline-title {
-
             margin: 3px 0;
-
-            font-size: 17px;
-
+            font-size: 16px;
             font-weight: 500;
-
             color: #6d5d61;
         }
 
-
         .timeline-text {
-
             margin: 0;
-
-            font-size: 13px;
-
+            font-size: 12px;
             color: #95888b;
         }
 
-
-        /* ==================================================
-           Memories
-        ================================================== */
-
+        /* ===== Memory ===== */
         .memory-grid {
-
             display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
-            gap: 20px;
-
-            max-width: 700px;
-
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            max-width: 760px;
             margin: 0 auto;
         }
 
-
         .memory-card {
-
-            padding: 25px;
-
-            background: rgba(
-                255,
-                255,
-                255,
-                0.85
-            );
-
+            padding: 18px 20px;
+            background: rgba(255,255,255,0.85);
             border-radius: 18px;
-
-            box-shadow:
-                0 8px 30px
-                rgba(
-                    80,
-                    50,
-                    60,
-                    0.06
-                );
-
-            transition:
-                transform 0.3s ease,
-                box-shadow 0.3s ease;
+            box-shadow: 0 8px 30px rgba(80,50,60,0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
 
         .memory-card:hover {
-
-            transform:
-                translateY(-5px);
-
-            box-shadow:
-                0 15px 35px
-                rgba(
-                    80,
-                    50,
-                    60,
-                    0.1
-                );
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(80,50,60,0.1);
         }
 
-
         .memory-icon {
-
-            margin-bottom: 8px;
-
+            margin-bottom: 5px;
             font-size: 28px;
         }
 
-
         .memory-card h3 {
-
-            margin: 0 0 5px;
-
-            font-size: 17px;
-
+            margin: 0 0 4px;
+            font-size: 16px;
             font-weight: 500;
-
             color: #6d5d61;
         }
 
-
         .memory-card p {
-
             margin: 0;
-
-            font-size: 13px;
-
+            font-size: 12px;
             color: #95888b;
         }
 
-
-        /* ==================================================
-           Letter
-        ================================================== */
-
+        /* ===== Letter ===== */
         .letter {
-
             max-width: 650px;
-
             margin: 0 auto;
-
-            padding: 40px 45px;
-
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.9
-                );
-
+            padding: 35px 42px;
+            background: rgba(255,255,255,0.9);
             border-radius: 18px;
-
-            box-shadow:
-                0 8px 30px
-                rgba(
-                    80,
-                    50,
-                    60,
-                    0.05
-                );
-
+            box-shadow: 0 8px 30px rgba(80,50,60,0.05);
             text-align: left;
         }
 
-
         .letter p {
-
-            margin:
-                0 0 16px;
-
+            margin: 0 0 16px;
             font-size: 15px;
-
             color: #75696c;
         }
 
-
         .letter-sign {
-
             margin-top: 25px;
-
             text-align: right;
-
             color: #c9788b;
         }
 
-
-        /* ==================================================
-           End Page
-        ================================================== */
-
+        /* ===== End ===== */
         .end-heart {
-
             margin-bottom: 25px;
-
             font-size: 60px;
         }
 
-
         .end-title {
-
             margin: 0;
-
             font-size: 36px;
-
             font-weight: 500;
-
             color: #c86f83;
         }
 
-
         .end-text {
-
             margin-top: 20px;
-
             color: #817477;
         }
 
-
         .restart-button {
-
             margin-top: 40px;
-
             padding: 12px 28px;
-
             border: 1px solid #e5b8c1;
-
             border-radius: 30px;
-
             background: transparent;
-
             color: #c9788b;
-
             cursor: pointer;
-
             font-family: inherit;
-
             transition: 0.25s;
         }
 
-
         .restart-button:hover {
-
             background: #fff0f3;
-
-            transform:
-                translateY(-2px);
+            transform: translateY(-2px);
         }
 
-
-        /* ==================================================
-           右側頁面指示器
-        ================================================== */
-
+        /* ===== Indicator ===== */
         .page-indicator {
-
             position: fixed;
-
             top: 50%;
-
             right: 25px;
-
-            transform:
-                translateY(-50%);
-
+            transform: translateY(-50%);
             z-index: 100;
         }
 
-
         .indicator-dot {
-
             display: block;
-
             width: 8px;
-
             height: 8px;
-
             margin: 12px 0;
-
             padding: 0;
-
             border: none;
-
             border-radius: 50%;
-
             background: #dfc3c9;
-
             cursor: pointer;
-
-            transition:
-                all 0.3s ease;
+            transition: all 0.3s ease;
         }
 
-
         .indicator-dot.active {
-
             height: 22px;
-
             border-radius: 5px;
-
             background: #c9788b;
         }
 
-
-        /* ==================================================
-           上一頁 / 下一頁
-        ================================================== */
-
+        /* ===== Navigation ===== */
         .page-navigation {
-
             position: fixed;
-
             right: 18px;
-
             bottom: 25px;
-
             z-index: 100;
-
             display: flex;
-
             gap: 8px;
         }
 
-
         .nav-button {
-
             width: 38px;
-
             height: 38px;
-
             border: 1px solid #ead1d6;
-
             border-radius: 50%;
-
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.8
-                );
-
+            background: rgba(255,255,255,0.8);
             color: #c9788b;
-
             cursor: pointer;
-
             transition: 0.25s;
         }
 
-
         .nav-button:hover {
-
             background: #fff0f3;
-
-            transform:
-                translateY(-2px);
+            transform: translateY(-2px);
         }
 
-
-        /* ==================================================
-           頁面進場動畫
-        ================================================== */
-
+        /* ===== Animation ===== */
         .animate-item {
-
             opacity: 0;
-
-            transform:
-                translateY(25px);
-
-            transition:
-                opacity 0.8s ease,
-                transform 0.8s ease;
+            transform: translateY(25px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
-
-        .story-page.active
-        .animate-item {
-
+        .story-page.active .animate-item {
             opacity: 1;
-
-            transform:
-                translateY(0);
+            transform: translateY(0);
         }
 
+        .story-page.active .delay-1 { transition-delay: 0.15s; }
+        .story-page.active .delay-2 { transition-delay: 0.3s; }
+        .story-page.active .delay-3 { transition-delay: 0.45s; }
+        .story-page.active .delay-4 { transition-delay: 0.6s; }
 
-        .story-page.active
-        .delay-1 {
-
-            transition-delay:
-                0.15s;
+        /* ===== Password Screen ===== */
+        .password-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            background: linear-gradient(180deg, #fff1f4 0%, #fffaf9 100%);
+            transition: opacity 0.8s ease, visibility 0.8s ease;
         }
 
-
-        .story-page.active
-        .delay-2 {
-
-            transition-delay:
-                0.3s;
+        .password-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
         }
 
-
-        .story-page.active
-        .delay-3 {
-
-            transition-delay:
-                0.45s;
+        .password-screen::before {
+            content: "♡";
+            position: absolute;
+            top: 15%;
+            left: 15%;
+            font-size: 35px;
+            color: #d98a9b;
+            opacity: 0.15;
+            animation: floatHeart 6s ease-in-out infinite;
         }
 
-
-        .story-page.active
-        .delay-4 {
-
-            transition-delay:
-                0.6s;
+        .password-screen::after {
+            content: "♡";
+            position: absolute;
+            right: 15%;
+            bottom: 18%;
+            font-size: 28px;
+            color: #d98a9b;
+            opacity: 0.15;
+            animation: floatHeart 6s ease-in-out infinite;
+            animation-delay: 1.5s;
         }
 
-		/* ==================================================
-		   Password Screen
-		================================================== */
+        .password-box {
+            position: relative;
+            z-index: 2;
+            width: min(420px, 100%);
+            padding: 45px 35px;
+            text-align: center;
+            background: rgba(255,255,255,0.88);
+            border-radius: 24px;
+            box-shadow: 0 15px 50px rgba(80,50,60,0.08);
+        }
+
+        .password-heart {
+            margin-bottom: 12px;
+            font-size: 48px;
+            animation: heartBeat 2.5s ease-in-out infinite;
+        }
+
+        .password-label {
+            margin-bottom: 8px;
+            font-size: 10px;
+            letter-spacing: 3px;
+            color: #c48694;
+        }
+
+        .password-box h1 {
+            margin: 0;
+            font-size: 32px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            color: #c86f83;
+        }
+
+        .password-box p {
+            margin: 12px 0 25px;
+            font-size: 14px;
+            color: #95888b;
+        }
+
+        .password-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .password-input-group input {
+            width: 100%;
+            height: 46px;
+            padding: 0 16px;
+            border: 1px solid #ead1d6;
+            border-radius: 12px;
+            outline: none;
+            background: #fffaf9;
+            color: #6d5d61;
+            font-family: inherit;
+            font-size: 14px;
+            text-align: center;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .password-input-group input:focus {
+            border-color: #d98a9b;
+            box-shadow: 0 0 0 3px rgba(217,138,155,0.12);
+        }
+
+        .password-input-group button {
+            height: 46px;
+            border: none;
+            border-radius: 12px;
+            background: #c9788b;
+            color: white;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 14px;
+            transition: background 0.25s ease, transform 0.25s ease;
+        }
+
+        .password-input-group button:hover {
+            background: #bd687d;
+            transform: translateY(-2px);
+        }
+
+        .password-error {
+            margin-top: 12px;
+            font-size: 12px;
+            color: #c9788b;
+            opacity: 0;
+            transform: translateY(-5px);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        .password-error.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .password-hint {
+            margin-top: 28px;
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: #c9b7bb;
+        }
 
-		.password-screen {
-
-			position: fixed;
-
-			inset: 0;
-
-			z-index: 9999;
-
-			display: flex;
-
-			justify-content: center;
-
-			align-items: center;
-
-			padding: 25px;
-
-			background:
-				linear-gradient(
-					180deg,
-					#fff1f4 0%,
-					#fffaf9 100%
-				);
-
-			transition:
-				opacity 0.8s ease,
-				visibility 0.8s ease;
-		}
-
-
-		.password-screen.hidden {
-
-			opacity: 0;
-
-			visibility: hidden;
-
-			pointer-events: none;
-		}
-
-
-		/* 背景淡淡的心 */
-
-		.password-screen::before {
-
-			content: "♡";
-
-			position: absolute;
-
-			top: 15%;
-
-			left: 15%;
-
-			font-size: 35px;
-
-			color: #d98a9b;
-
-			opacity: 0.15;
-
-			animation:
-				floatHeart 6s ease-in-out infinite;
-		}
-
-
-		.password-screen::after {
-
-			content: "♡";
-
-			position: absolute;
-
-			right: 15%;
-
-			bottom: 18%;
-
-			font-size: 28px;
-
-			color: #d98a9b;
-
-			opacity: 0.15;
-
-			animation:
-				floatHeart 6s ease-in-out infinite;
-
-			animation-delay: 1.5s;
-		}
-
-
-		/* ==================================================
-		   Password Box
-		================================================== */
-
-		.password-box {
-
-			position: relative;
-
-			z-index: 2;
-
-			width: min(
-				420px,
-				100%
-			);
-
-			padding: 45px 35px;
-
-			text-align: center;
-
-			background:
-				rgba(
-					255,
-					255,
-					255,
-					0.88
-				);
-
-			border-radius: 24px;
-
-			box-shadow:
-				0 15px 50px
-				rgba(
-					80,
-					50,
-					60,
-					0.08
-				);
-		}
-
-
-		/* 愛心 */
-
-		.password-heart {
-
-			margin-bottom: 12px;
-
-			font-size: 48px;
-
-			animation:
-				heartBeat 2.5s ease-in-out infinite;
-		}
-
-
-		/* 英文小標 */
-
-		.password-label {
-
-			margin-bottom: 8px;
-
-			font-size: 10px;
-
-			letter-spacing: 3px;
-
-			color: #c48694;
-		}
-
-
-		/* 標題 */
-
-		.password-box h1 {
-
-			margin: 0;
-
-			font-size: 32px;
-
-			font-weight: 500;
-
-			letter-spacing: 3px;
-
-			color: #c86f83;
-		}
-
-
-		/* 說明 */
-
-		.password-box p {
-
-			margin: 12px 0 25px;
-
-			font-size: 14px;
-
-			color: #95888b;
-		}
-
-
-		/* ==================================================
-		   Input
-		================================================== */
-
-		.password-input-group {
-
-			display: flex;
-
-			flex-direction: column;
-
-			gap: 10px;
-		}
-
-
-		.password-input-group input {
-
-			width: 100%;
-
-			height: 46px;
-
-			padding: 0 16px;
-
-			border:
-				1px solid #ead1d6;
-
-			border-radius: 12px;
-
-			outline: none;
-
-			background: #fffaf9;
-
-			color: #6d5d61;
-
-			font-family: inherit;
-
-			font-size: 14px;
-
-			text-align: center;
-
-			transition:
-				border-color 0.25s ease,
-				box-shadow 0.25s ease;
-		}
-
-
-		.password-input-group input:focus {
-
-			border-color: #d98a9b;
-
-			box-shadow:
-				0 0 0 3px
-				rgba(
-					217,
-					138,
-					155,
-					0.12
-				);
-		}
-
-
-		.password-input-group button {
-
-			height: 46px;
-
-			border: none;
-
-			border-radius: 12px;
-
-			background: #c9788b;
-
-			color: white;
-
-			cursor: pointer;
-
-			font-family: inherit;
-
-			font-size: 14px;
-
-			transition:
-				background 0.25s ease,
-				transform 0.25s ease;
-		}
-
-
-		.password-input-group button:hover {
-
-			background: #bd687d;
-
-			transform:
-				translateY(-2px);
-		}
-
-
-		/* ==================================================
-		   錯誤訊息
-		================================================== */
-
-		.password-error {
-
-			margin-top: 12px;
-
-			font-size: 12px;
-
-			color: #c9788b;
-
-			opacity: 0;
-
-			transform:
-				translateY(-5px);
-
-			transition:
-				opacity 0.25s ease,
-				transform 0.25s ease;
-		}
-
-
-		.password-error.show {
-
-			opacity: 1;
-
-			transform:
-				translateY(0);
-		}
-
-
-		/* ==================================================
-		   Footer Hint
-		================================================== */
-
-		.password-hint {
-
-			margin-top: 28px;
-
-			font-size: 10px;
-
-			letter-spacing: 2px;
-
-			color: #c9b7bb;
-		}
-
-        /* ==================================================
-           手機
-        ================================================== */
-
+        /* ===== Mobile ===== */
         @media (max-width: 650px) {
-		
-			.password-box {
-
-				padding: 35px 25px;
-
-				border-radius: 20px;
-			}
-
-
-			.password-heart {
-
-				font-size: 42px;
-			}
-
-
-			.password-box h1 {
-
-				font-size: 28px;
-			}
-
-
-			.password-box p {
-
-				font-size: 13px;
-			}
-
-            .story-page {
-
-                padding:
-                    30px 20px;
+            .password-box {
+                padding: 35px 25px;
+                border-radius: 20px;
             }
 
+            .password-heart { font-size: 42px; }
+            .password-box h1 { font-size: 28px; }
+            .password-box p { font-size: 13px; }
 
-            .page-content {
+            .story-page { padding: 30px 20px; }
+            .page-content { max-height: 90vh; }
+            .hero-heart { font-size: 55px; }
+            .hero-description { font-size: 16px; }
+            .scroll-hint { margin-top: 40px; }
 
-                max-height: 90vh;
-            }
-
-
-            .hero-heart {
-
-                font-size: 55px;
-            }
-
-
-            .hero-description {
-
-                font-size: 16px;
-            }
-
-
-            .scroll-hint {
-
-                margin-top: 40px;
-            }
-
-
-            .timeline {
-
-                max-width: 100%;
-            }
-
-
-            .timeline::before {
-
-                left: 8px;
-            }
-
+            .timeline { max-width: 100%; }
+            .timeline::before { left: 8px; }
 
             .timeline-item,
             .timeline-item:nth-child(odd),
             .timeline-item:nth-child(even) {
-
                 width: 100%;
-
                 left: 0;
-
-                padding:
-                    8px 10px 8px 30px;
-
+                padding: 7px 10px 7px 30px;
                 text-align: left;
             }
 
-
-            .timeline-item:nth-child(odd)
-            .timeline-dot,
-            .timeline-item:nth-child(even)
-            .timeline-dot {
-
+            .timeline-item:nth-child(odd) .timeline-dot,
+            .timeline-item:nth-child(even) .timeline-dot {
                 left: 2px;
-
                 right: auto;
             }
 
+            .timeline-text { font-size: 11px; }
 
-            .timeline-text {
-
-                font-size: 12px;
+            .page-memory {
+                align-items: center;
+                padding: 25px 20px;
             }
 
-
-            /* ==================================================
-			   Mobile - Page 04 Memory
-			================================================== */
-
-			.page-memory {
-
-				align-items: center;
-
-				padding:
-					25px 20px;
-			}
-
-
-			.page-memory .page-content {
-
-				width: 100%;
-
-				max-height: none;
-			}
-
-
-			/* Chapter */
-			.page-memory .chapter {
-
-				margin-bottom: 5px;
-			}
-
-
-			/* 標題 */
-			.page-memory .section-title {
-
-				margin-bottom: 5px;
-			}
-
-
-			/* 副標題 */
-			.page-memory .section-subtitle {
-
-				margin-bottom: 15px;
-			}
-
-
-			/* ==================================================
-			   四張回憶卡片
-			================================================== */
-
-			.memory-grid {
-
-				grid-template-columns: 1fr;
-
-				gap: 8px;
-
-				width: 100%;
-
-				max-width: 500px;
-
-				margin: 0 auto;
-			}
-
-
-			.memory-card {
-
-				padding: 10px 16px;
-
-				min-height: 0;
-
-				border-radius: 14px;
-			}
-
-
-			/* Icon */
-
-			.memory-icon {
-
-				margin-bottom: 3px;
-
-				font-size: 23px;
-
-				line-height: 1.2;
-			}
-
-
-			/* 標題 */
-
-			.memory-card h3 {
-
-				margin: 0 0 2px;
-
-				font-size: 15px;
-
-				line-height: 1.4;
-			}
-
-
-			/* 內容 */
-
-			.memory-card p {
-
-				margin: 0;
-
-				font-size: 12px;
-
-				line-height: 1.4;
-			}
-
-
-            .letter {
-
-                padding:
-                    28px 22px;
+            .page-memory .page-content {
+                width: 100%;
+                max-height: none;
             }
 
+            .page-memory .chapter { margin-bottom: 5px; }
+            .page-memory .section-title { margin-bottom: 5px; }
+            .page-memory .section-subtitle { margin-bottom: 12px; }
 
-            .letter p {
+            .memory-grid {
+                grid-template-columns: 1fr;
+                gap: 7px;
+                width: 100%;
+                max-width: 500px;
+            }
 
+            .memory-card {
+                padding: 9px 15px;
+                border-radius: 14px;
+            }
+
+            .memory-icon {
+                margin-bottom: 2px;
+                font-size: 21px;
+                line-height: 1.2;
+            }
+
+            .memory-card h3 {
+                margin: 0 0 2px;
                 font-size: 14px;
+                line-height: 1.35;
             }
 
-
-            .page-indicator {
-
-                right: 12px;
+            .memory-card p {
+                margin: 0;
+                font-size: 11px;
+                line-height: 1.35;
             }
 
+            .letter { padding: 28px 22px; }
+            .letter p { font-size: 14px; }
 
+            .page-indicator { right: 12px; }
             .indicator-dot {
-
                 width: 6px;
-
                 height: 6px;
-
                 margin: 9px 0;
             }
 
-
-            .indicator-dot.active {
-
-                height: 18px;
-            }
-
+            .indicator-dot.active { height: 18px; }
 
             .page-navigation {
-
                 right: 12px;
-
                 bottom: 15px;
             }
 
-
             .nav-button {
-
                 width: 34px;
-
                 height: 34px;
             }
-
         }
-
     </style>
-
 </head>
 
 <body>
+
 <!-- ==================================================
      密碼入口
 ================================================== -->
-
 <div class="password-screen" id="passwordScreen">
-
     <div class="password-box">
-
-        <div class="password-heart">
-            ❤️
-        </div>
+        <div class="password-heart">❤️</div>
 
         <div class="password-label">
             A LITTLE PLACE FOR US
         </div>
 
-        <h1>
-            給恩恩
-        </h1>
+        <h1>給恩恩</h1>
 
-        <p>
-            這是一個只屬於我們的小角落。
-        </p>
+        <p>這是一個只屬於我們的小角落。</p>
 
         <div class="password-input-group">
-
             <input
                 type="password"
                 id="passwordInput"
                 placeholder="輸入密碼"
                 autocomplete="off">
 
-            <button
-                id="passwordButton">
-
+            <button id="passwordButton">
                 進入 ❤️
-
             </button>
-
         </div>
 
-        <div
-            class="password-error"
-            id="passwordError">
-
+        <div class="password-error" id="passwordError">
             密碼好像不對，再試一次看看。
-
         </div>
 
         <div class="password-hint">
             Only for us.
         </div>
-
     </div>
-
 </div>
 
 <!-- ==================================================
      Page Indicator
 ================================================== -->
-
 <nav class="page-indicator">
-
-    <button
-        class="indicator-dot active"
-        data-index="0">
-    </button>
-
-    <button
-        class="indicator-dot"
-        data-index="1">
-    </button>
-
-    <button
-        class="indicator-dot"
-        data-index="2">
-    </button>
-
-    <button
-        class="indicator-dot"
-        data-index="3">
-    </button>
-
-    <button
-        class="indicator-dot"
-        data-index="4">
-    </button>
-
-    <button
-        class="indicator-dot"
-        data-index="5">
-    </button>
-
+    <button class="indicator-dot active" data-index="0"></button>
+    <button class="indicator-dot" data-index="1"></button>
+    <button class="indicator-dot" data-index="2"></button>
+    <button class="indicator-dot" data-index="3"></button>
+    <button class="indicator-dot" data-index="4"></button>
+    <button class="indicator-dot" data-index="5"></button>
 </nav>
-
 
 <!-- ==================================================
      Page Navigation
 ================================================== -->
-
 <div class="page-navigation">
-
-    <button
-        class="nav-button"
-        id="prevPage">
-        ↑
-    </button>
-
-    <button
-        class="nav-button"
-        id="nextPage">
-        ↓
-    </button>
-
+    <button class="nav-button" id="prevPage">↑</button>
+    <button class="nav-button" id="nextPage">↓</button>
 </div>
-
 
 <!-- ==================================================
      Story Container
 ================================================== -->
+<main class="story-container" id="storyContainer">
 
-<main class="story-container"
-      id="storyContainer">
-
-
-    <!-- ==================================================
-         Page 01
-    ================================================== -->
-
-    <section
-        class="story-page page-hero active"
-        data-page="0">
-
-        <span class="background-heart heart-1">
-            ♡
-        </span>
-
-        <span class="background-heart heart-2">
-            ♡
-        </span>
-
-        <span class="background-heart heart-3">
-            ♡
-        </span>
-
-        <span class="background-heart heart-4">
-            ♡
-        </span>
-
+    <!-- Page 01 -->
+    <section class="story-page page-hero active" data-page="0">
+        <span class="background-heart heart-1">♡</span>
+        <span class="background-heart heart-2">♡</span>
+        <span class="background-heart heart-3">♡</span>
+        <span class="background-heart heart-4">♡</span>
 
         <div class="page-content">
-
-            <div class="hero-heart animate-item">
-                ❤️
-            </div>
+            <div class="hero-heart animate-item">❤️</div>
 
             <h1 class="hero animate-item delay-1">
                 給恩恩的小角落
@@ -1713,25 +737,13 @@
 
             <div class="scroll-hint animate-item delay-4">
                 往下看看我們的故事
-
-                <div class="scroll-arrow">
-                    ↓
-                </div>
+                <div class="scroll-arrow">↓</div>
             </div>
-
         </div>
-
     </section>
 
-
-    <!-- ==================================================
-         Page 02
-    ================================================== -->
-
-    <section
-        class="story-page page-story"
-        data-page="1">
-
+    <!-- Page 02 -->
+    <section class="story-page page-story" data-page="1">
         <div class="page-content">
 
             <div class="chapter animate-item">
@@ -1739,39 +751,35 @@
             </div>
 
             <h2 class="section-title animate-item delay-1">
-                我們的故事
+                認識恩恩
             </h2>
 
             <p class="section-subtitle animate-item delay-2">
-                有些日子，會因為某個人而變得特別。
+                像洋桔梗一樣，溫柔又有自己的樣子。
             </p>
 
             <p class="story-text animate-item delay-2">
-                這裡沒有什麼特別偉大的故事，
-                只是想把那些一起聊天、一起吃飯、
-                一起走過的日子，好好留下來。
+                2026 年 8 月 8 日，我認識了恩恩。
+                <br>
+                她喜歡烘焙、下廚、恐怖片、咖啡、動漫和城市觀光，
+                也有一隻可愛的英國長毛貓咪嚕。
+                <br><br>
+                她喜歡直來直往，不喜歡拐彎抹角。
+                喜歡日料、韓料、熱炒和路邊攤。
+                而這些關於她的小小細節，
+                我想一點一點記在這裡。
             </p>
 
             <div class="quote animate-item delay-3">
-
-                「也許我們還有很多故事沒有寫下來，
-                但沒關係，慢慢來就好了。」
-
+                「有些人認識的時間不長，
+                卻會讓你開始期待，
+                下一個和她一起發生的故事。」
             </div>
-
         </div>
-
     </section>
 
-
-    <!-- ==================================================
-         Page 03
-    ================================================== -->
-
-    <section
-        class="story-page page-timeline"
-        data-page="2">
-
+    <!-- Page 03 -->
+    <section class="story-page page-timeline" data-page="2">
         <div class="page-content">
 
             <div class="chapter animate-item">
@@ -1786,84 +794,68 @@
                 一點一點，把我們的故事串起來。
             </p>
 
-
             <div class="timeline animate-item delay-3">
 
-
                 <div class="timeline-item">
-
                     <div class="timeline-dot"></div>
-
-                    <div class="timeline-date">
-                        2026 / 08
-                    </div>
-
-                    <div class="timeline-title">
-                        故事的開始
-                    </div>
-
+                    <div class="timeline-date">08 / 08</div>
+                    <div class="timeline-title">認識恩恩</div>
                     <p class="timeline-text">
-                        這裡可以寫下我們第一次認識、
-                        第一次聊天的故事。
+                        故事從這一天開始。
                     </p>
-
                 </div>
 
-
                 <div class="timeline-item">
-
                     <div class="timeline-dot"></div>
-
-                    <div class="timeline-date">
-                        2026 / 08
-                    </div>
-
-                    <div class="timeline-title">
-                        第一次一起出去
-                    </div>
-
+                    <div class="timeline-date">08 / 16</div>
+                    <div class="timeline-title">第一次聽到恩恩的聲音</div>
                     <p class="timeline-text">
-                        那一天發生了什麼，
-                        可以慢慢記錄在這裡。
+                        第一次真正聽見她的聲音。
                     </p>
-
                 </div>
 
-
                 <div class="timeline-item">
-
                     <div class="timeline-dot"></div>
-
-                    <div class="timeline-date">
-                        未來
-                    </div>
-
-                    <div class="timeline-title">
-                        還沒寫下的故事
-                    </div>
-
+                    <div class="timeline-date">08 / 17</div>
+                    <div class="timeline-title">看到咪嚕的可愛照片</div>
                     <p class="timeline-text">
-                        因為我們的故事還在繼續。
+                        英國長毛貓咪嚕登場 🐱
                     </p>
-
                 </div>
 
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">08 / 20</div>
+                    <div class="timeline-title">第一次看到恩恩的手手</div>
+                    <p class="timeline-text">
+                        🤲 還跟恩恩打了勾勾。
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">08 / 21</div>
+                    <div class="timeline-title">認識恩恩的閨蜜姊妹</div>
+                    <p class="timeline-text">
+                        第一次認識黛黛。
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">10 月底</div>
+                    <div class="timeline-title">約定好的約會</div>
+                    <p class="timeline-text">
+                        花束 + 小卡片，還有一份藏在 QR Code 裡的小驚喜。
+                    </p>
+                </div>
 
             </div>
-
         </div>
-
     </section>
 
-
-    <!-- ==================================================
-         Page 04
-    ================================================== -->
-
-    <section
-        class="story-page page-memory"
-        data-page="3">
-
+    <!-- Page 04 -->
+    <section class="story-page page-memory" data-page="3">
         <div class="page-content">
 
             <div class="chapter animate-item">
@@ -1871,101 +863,93 @@
             </div>
 
             <h2 class="section-title animate-item delay-1">
-                一些小小的回憶
+                恩恩的小檔案
             </h2>
 
             <p class="section-subtitle animate-item delay-2">
-                平凡的日子，也值得被記住。
+                一些關於恩恩，我想好好記住的事情。
             </p>
-
 
             <div class="memory-grid animate-item delay-3">
 
-
                 <div class="memory-card">
-
-                    <div class="memory-icon">
-                        🌷
-                    </div>
-
-                    <h3>
-                        那一天
-                    </h3>
-
-                    <p>
-                        一件只有我們知道的小事情。
-                    </p>
-
+                    <div class="memory-icon">🌷</div>
+                    <h3>像洋桔梗</h3>
+                    <p>恩恩像洋桔梗一樣，有著自己的溫柔。</p>
                 </div>
 
-
                 <div class="memory-card">
-
-                    <div class="memory-icon">
-                        ☕
-                    </div>
-
-                    <h3>
-                        一起度過的時間
-                    </h3>
-
-                    <p>
-                        吃飯、聊天、散步，
-                        都值得記住。
-                    </p>
-
+                    <div class="memory-icon">🍳</div>
+                    <h3>喜歡下廚</h3>
+                    <p>約定要吃恩恩做的烤牛奶、金沙豆腐。</p>
                 </div>
 
-
                 <div class="memory-card">
-
-                    <div class="memory-icon">
-                        📷
-                    </div>
-
-                    <h3>
-                        想留下的照片
-                    </h3>
-
-                    <p>
-                        之後把我們的照片放進來。
-                    </p>
-
+                    <div class="memory-icon">☕</div>
+                    <h3>喜歡的東西</h3>
+                    <p>烘焙、咖啡、恐怖片、動漫、城市觀光。</p>
                 </div>
 
-
                 <div class="memory-card">
-
-                    <div class="memory-icon">
-                        💌
-                    </div>
-
-                    <h3>
-                        想說的話
-                    </h3>
-
-                    <p>
-                        有些話，可以留在這裡。
-                    </p>
-
+                    <div class="memory-icon">🍜</div>
+                    <h3>喜歡吃</h3>
+                    <p>日料、韓料、熱炒、路邊攤、牛肉湯麵、刀削麵。</p>
                 </div>
 
+                <div class="memory-card">
+                    <div class="memory-icon">🥚</div>
+                    <h3>特別喜歡</h3>
+                    <p>起司蛋餅、阿嬤包的鹼粽、菲律賓青豆。</p>
+                </div>
+
+                <div class="memory-card">
+                    <div class="memory-icon">🐱</div>
+                    <h3>咪嚕</h3>
+                    <p>一隻可愛的英國長毛貓。</p>
+                </div>
+
+                <div class="memory-card">
+                    <div class="memory-icon">🎬</div>
+                    <h3>旅行與回憶</h3>
+                    <p>去過東京淺草、新宿、秋葉原和東京迪士尼。</p>
+                </div>
+
+                <div class="memory-card">
+                    <div class="memory-icon">🎰</div>
+                    <h3>過年習慣</h3>
+                    <p>過年的時候喜歡刮刮樂。</p>
+                </div>
+
+                <div class="memory-card">
+                    <div class="memory-icon">🚗</div>
+                    <h3>關於開車</h3>
+                    <p>開 C300，而且第一次開車就撞倒整排機車。</p>
+                </div>
+
+                <div class="memory-card">
+                    <div class="memory-icon">🦷</div>
+                    <h3>小小潔癖</h3>
+                    <p>不喜歡擠得像爆米花一樣的牙膏。</p>
+                </div>
+
+                <div class="memory-card">
+                    <div class="memory-icon">🎵</div>
+                    <h3>不喜歡的歌</h3>
+                    <p>《男子漢的浪漫》。</p>
+                </div>
+
+                <div class="memory-card">
+                    <div class="memory-icon">📦</div>
+                    <h3>旋轉拍賣</h3>
+                    <p>恩恩有在經營旋轉拍賣。</p>
+                </div>
 
             </div>
-
         </div>
-
     </section>
 
-
-    <!-- ==================================================
-         Page 05
-    ================================================== -->
-
-    <section
-        class="story-page page-letter"
-        data-page="4">
-
+    <!-- Page 05 -->
+    <section class="story-page page-letter" data-page="4">
         <div class="page-content">
 
             <div class="chapter animate-item">
@@ -1980,27 +964,41 @@
                 一封還在慢慢寫的信。
             </p>
 
-
             <div class="letter animate-item delay-3">
 
+                <p>恩恩：</p>
+
                 <p>
-                    恩恩：
+                    2026 年 8 月 8 日認識妳之後，
+                    我開始慢慢記住好多關於妳的小事情。
                 </p>
 
                 <p>
-                    我想做這個小網站，
-                    不是因為覺得它需要多厲害，
-                    而是想留下一個地方，
-                    可以記錄一些我們一起經歷過的事情。
+                    記得 8 月 16 日第一次聽到妳的聲音，
+                    8 月 17 日看到咪嚕的可愛照片，
+                    8 月 20 日第一次看到妳的手手，
+                    還跟妳打了勾勾。
                 </p>
 
                 <p>
-                    也許以後回頭看的時候，
-                    會覺得現在的我們很可愛。
+                    8 月 21 日，我也認識了妳的閨蜜姊妹黛黛。
                 </p>
 
                 <p>
-                    所以就慢慢記錄吧。
+                    我們還約好了，要吃妳做的烤牛奶和金沙豆腐，
+                    也約好了 10 月底要見面。
+                    到時候我想帶一束花，
+                    再準備一張小卡片。
+                </p>
+
+                <p>
+                    而這個網站的 QR Code，
+                    就藏在那張小卡片裡。
+                </p>
+
+                <p>
+                    希望等妳看到的時候，
+                    會覺得這些小小的回憶很可愛。
                 </p>
 
                 <div class="letter-sign">
@@ -2008,25 +1006,14 @@
                 </div>
 
             </div>
-
         </div>
-
     </section>
 
-
-    <!-- ==================================================
-         Page 06
-    ================================================== -->
-
-    <section
-        class="story-page page-end"
-        data-page="5">
-
+    <!-- Page 06 -->
+    <section class="story-page page-end" data-page="5">
         <div class="page-content">
 
-            <div class="end-heart animate-item">
-                ❤️
-            </div>
+            <div class="end-heart animate-item">❤️</div>
 
             <h2 class="end-title animate-item delay-1">
                 故事還沒有結束
@@ -2035,435 +1022,215 @@
             <p class="end-text animate-item delay-2">
                 因為我們還有很多日子，
                 可以慢慢寫下來。
+                <br>
+                下一頁，留給未來的我們。
             </p>
 
-            <button
-                class="restart-button animate-item delay-3"
-                id="restartButton">
-
+            <button class="restart-button animate-item delay-3" id="restartButton">
                 從第一頁開始
-
             </button>
 
         </div>
-
     </section>
-
 
 </main>
 
-
 <script>
-	/* ==================================================
-	   密碼入口
-	================================================== */
+    /* ==================================================
+       密碼入口
+    ================================================== */
 
-	const PASSWORD = "恩恩";
+    const PASSWORD = "恩恩";
 
-	const passwordScreen =
-		document.getElementById(
-			"passwordScreen"
-		);
+    const passwordScreen = document.getElementById("passwordScreen");
+    const passwordInput = document.getElementById("passwordInput");
+    const passwordButton = document.getElementById("passwordButton");
+    const passwordError = document.getElementById("passwordError");
 
-	const passwordInput =
-		document.getElementById(
-			"passwordInput"
-		);
+    function checkPassword() {
+        const password = passwordInput.value.trim();
 
-	const passwordButton =
-		document.getElementById(
-			"passwordButton"
-		);
+        if (password === PASSWORD) {
+            passwordError.classList.remove("show");
+            passwordScreen.classList.add("hidden");
 
-	const passwordError =
-		document.getElementById(
-			"passwordError"
-		);
+            container.scrollTo({
+                top: 0,
+                behavior: "instant"
+            });
 
+            currentPage = 0;
+            updateIndicator(0);
+        } else {
+            passwordError.classList.add("show");
+            passwordInput.value = "";
+            passwordInput.focus();
+        }
+    }
 
-	function checkPassword() {
+    passwordButton.addEventListener("click", checkPassword);
 
-		const password =
-			passwordInput.value.trim();
-
-
-		if (password === PASSWORD) {
-
-			passwordError.classList.remove(
-				"show"
-			);
-
-			passwordScreen.classList.add(
-				"hidden"
-			);
-
-			// 讓網站回到第一頁
-			container.scrollTo({
-				top: 0,
-				behavior: "instant"
-			});
-
-			currentPage = 0;
-
-			updateIndicator(0);
-
-		} else {
-
-			passwordError.classList.add(
-				"show"
-			);
-
-			passwordInput.value = "";
-
-			passwordInput.focus();
-
-		}
-
-	}
-
-
-	/* 按鈕 */
-
-	passwordButton.addEventListener(
-		"click",
-		checkPassword
-	);
-
-
-	/* Enter */
-
-	passwordInput.addEventListener(
-		"keydown",
-		event => {
-
-			if (event.key === "Enter") {
-
-				checkPassword();
-
-			}
-
-		}
-	);
+    passwordInput.addEventListener("keydown", event => {
+        if (event.key === "Enter") {
+            checkPassword();
+        }
+    });
 
     /* ==================================================
        基本設定
     ================================================== */
 
-    const container =
-        document.getElementById(
-            "storyContainer"
-        );
-
-
-    const pages =
-        document.querySelectorAll(
-            ".story-page"
-        );
-
-
-    const indicators =
-        document.querySelectorAll(
-            ".indicator-dot"
-        );
-
+    const container = document.getElementById("storyContainer");
+    const pages = document.querySelectorAll(".story-page");
+    const indicators = document.querySelectorAll(".indicator-dot");
 
     let currentPage = 0;
-
 
     /* ==================================================
        切換頁面
     ================================================== */
 
     function goToPage(index) {
-
-        if (index < 0) {
-            index = 0;
-        }
-
-        if (index >= pages.length) {
-            index = pages.length - 1;
-        }
-
+        if (index < 0) index = 0;
+        if (index >= pages.length) index = pages.length - 1;
 
         currentPage = index;
-
 
         pages[index].scrollIntoView({
             behavior: "smooth",
             block: "start"
         });
 
-
         updateIndicator(index);
     }
-
 
     /* ==================================================
        更新右側指示器
     ================================================== */
 
     function updateIndicator(index) {
-
-        indicators.forEach(
-            (indicator, i) => {
-
-                indicator.classList.toggle(
-                    "active",
-                    i === index
-                );
-
-            }
-        );
-
+        indicators.forEach((indicator, i) => {
+            indicator.classList.toggle("active", i === index);
+        });
     }
-
 
     /* ==================================================
        監聽目前頁面
     ================================================== */
 
-    const observer =
-        new IntersectionObserver(
-            (entries) => {
+    const observer = new IntersectionObserver(
+        entries => {
+            entries.forEach(entry => {
+                if (
+                    entry.isIntersecting &&
+                    entry.intersectionRatio >= 0.6
+                ) {
+                    const index = Number(entry.target.dataset.page);
 
-                entries.forEach(
-                    entry => {
+                    currentPage = index;
+                    updateIndicator(index);
+                    entry.target.classList.add("active");
+                }
+            });
+        },
+        {
+            root: container,
+            threshold: 0.6
+        }
+    );
 
-                        if (
-                            entry.isIntersecting &&
-                            entry.intersectionRatio >= 0.6
-                        ) {
-
-                            const index =
-                                Number(
-                                    entry
-                                        .target
-                                        .dataset
-                                        .page
-                                );
-
-                            currentPage =
-                                index;
-
-                            updateIndicator(
-                                index
-                            );
-
-                            entry
-                                .target
-                                .classList
-                                .add(
-                                    "active"
-                                );
-                        }
-
-                    }
-                );
-
-            },
-            {
-                root: container,
-
-                threshold: 0.6
-            }
-        );
-
-
-    pages.forEach(page => {
-
-        observer.observe(page);
-
-    });
-
+    pages.forEach(page => observer.observe(page));
 
     /* ==================================================
        右側頁面指示器
     ================================================== */
 
-    indicators.forEach(
-        indicator => {
-
-            indicator.addEventListener(
-                "click",
-                () => {
-
-                    const index =
-                        Number(
-                            indicator
-                                .dataset
-                                .index
-                        );
-
-                    goToPage(index);
-
-                }
-            );
-
-        }
-    );
-
+    indicators.forEach(indicator => {
+        indicator.addEventListener("click", () => {
+            const index = Number(indicator.dataset.index);
+            goToPage(index);
+        });
+    });
 
     /* ==================================================
-       上一頁
+       上一頁 / 下一頁
     ================================================== */
 
-    document
-        .getElementById("prevPage")
-        .addEventListener(
-            "click",
-            () => {
+    document.getElementById("prevPage").addEventListener("click", () => {
+        goToPage(currentPage - 1);
+    });
 
-                goToPage(
-                    currentPage - 1
-                );
-
-            }
-        );
-
-
-    /* ==================================================
-       下一頁
-    ================================================== */
-
-    document
-        .getElementById("nextPage")
-        .addEventListener(
-            "click",
-            () => {
-
-                goToPage(
-                    currentPage + 1
-                );
-
-            }
-        );
-
+    document.getElementById("nextPage").addEventListener("click", () => {
+        goToPage(currentPage + 1);
+    });
 
     /* ==================================================
        重新開始
     ================================================== */
 
-    document
-        .getElementById("restartButton")
-        .addEventListener(
-            "click",
-            () => {
-
-                goToPage(0);
-
-            }
-        );
-
+    document.getElementById("restartButton").addEventListener("click", () => {
+        goToPage(0);
+    });
 
     /* ==================================================
        滑鼠滾輪
-       
        避免一次滑過好幾頁
     ================================================== */
 
     let wheelLocked = false;
 
-
     container.addEventListener(
         "wheel",
         event => {
-
             if (wheelLocked) {
-
                 event.preventDefault();
-
                 return;
             }
 
-
-            if (
-                Math.abs(event.deltaY) < 10
-            ) {
-                return;
-            }
-
+            if (Math.abs(event.deltaY) < 10) return;
 
             event.preventDefault();
-
-
             wheelLocked = true;
 
-
             if (event.deltaY > 0) {
-
-                goToPage(
-                    currentPage + 1
-                );
-
+                goToPage(currentPage + 1);
             } else {
-
-                goToPage(
-                    currentPage - 1
-                );
-
+                goToPage(currentPage - 1);
             }
 
-
-            setTimeout(
-                () => {
-
-                    wheelLocked = false;
-
-                },
-                750
-            );
-
+            setTimeout(() => {
+                wheelLocked = false;
+            }, 750);
         },
-        {
-            passive: false
-        }
+        { passive: false }
     );
-
 
     /* ==================================================
        鍵盤操作
     ================================================== */
 
-    document.addEventListener(
-        "keydown",
-        event => {
-
-            if (
-                event.key === "ArrowDown" ||
-                event.key === "PageDown"
-            ) {
-
-                goToPage(
-                    currentPage + 1
-                );
-
-            }
-
-
-            if (
-                event.key === "ArrowUp" ||
-                event.key === "PageUp"
-            ) {
-
-                goToPage(
-                    currentPage - 1
-                );
-
-            }
-
+    document.addEventListener("keydown", event => {
+        if (
+            event.key === "ArrowDown" ||
+            event.key === "PageDown"
+        ) {
+            goToPage(currentPage + 1);
         }
-    );
 
+        if (
+            event.key === "ArrowUp" ||
+            event.key === "PageUp"
+        ) {
+            goToPage(currentPage - 1);
+        }
+    });
 
     /* ==================================================
        初始化
     ================================================== */
 
     updateIndicator(0);
-
 </script>
 
-
 </body>
-
 </html>
