@@ -791,16 +791,14 @@
 
 
 			.memory-grid {
+				display: grid;
 
-				display: flex;
-
-				flex-direction: column;
+				grid-template-columns: repeat(2, minmax(0, 1fr));
 
 				width: 100%;
-
 				max-width: 100%;
 
-				gap: 6px;
+				gap: 8px;
 
 				margin: 0;
 			}
@@ -817,30 +815,25 @@
 
 
 			.memory-icon {
-
-				margin-bottom: 1px;
+				margin-bottom: 2px;
 
 				font-size: 20px;
 
 				line-height: 1.1;
 			}
 
-
 			.memory-card h3 {
+				margin: 0 0 2px;
 
-				margin: 0 0 1px;
-
-				font-size: 14px;
+				font-size: 13px;
 
 				line-height: 1.3;
 			}
 
-
 			.memory-card p {
-
 				margin: 0;
 
-				font-size: 11px;
+				font-size: 10px;
 
 				line-height: 1.35;
 			}
@@ -1174,102 +1167,127 @@
     </section>
 
     <!-- Page 04 -->
-    <section class="story-page page-memory" data-page="3">
-        <div class="page-content">
+	<section class="story-page page-memory" data-page="3">
+		<div class="page-content">
 
-            <div class="chapter animate-item">
-                CHAPTER 03
-            </div>
+			<div class="chapter animate-item">
+				CHAPTER 03
+			</div>
 
-            <h2 class="section-title animate-item delay-1">
-                恩恩的小檔案
-            </h2>
+			<h2 class="section-title animate-item delay-1">
+				恩恩的小檔案
+			</h2>
 
-            <p class="section-subtitle animate-item delay-2">
-                一些關於恩恩，我想好好記住的事情。
-            </p>
+			<p class="section-subtitle animate-item delay-2">
+				關於恩恩，我想好好記住的事情。
+			</p>
 
-            <div class="memory-grid animate-item delay-3">
+			<div class="memory-grid animate-item delay-3">
 
-                <div class="memory-card">
-                    <div class="memory-icon">🌷</div>
-                    <h3>像洋桔梗</h3>
-                    <p>恩恩像洋桔梗一樣，有著自己的溫柔。</p>
-                </div>
+				<div class="memory-card">
+					<div class="memory-icon">🌷</div>
+					<h3>像洋桔梗</h3>
+					<p>恩恩像洋桔梗一樣，有著自己的溫柔。</p>
+				</div>
 
-                <div class="memory-card">
-                    <div class="memory-icon">🍳</div>
-                    <h3>喜歡下廚</h3>
-                    <p>約定要吃恩恩做的烤牛奶、金沙豆腐。</p>
-                </div>
+				<div class="memory-card">
+					<div class="memory-icon">☕</div>
+					<h3>喜歡的東西</h3>
+					<p>烘焙、咖啡、恐怖片、動漫、城市觀光。</p>
+				</div>
 
-                <div class="memory-card">
-                    <div class="memory-icon">☕</div>
-                    <h3>喜歡的東西</h3>
-                    <p>烘焙、咖啡、恐怖片、動漫、城市觀光。</p>
-                </div>
+				<div class="memory-card">
+					<div class="memory-icon">🍜</div>
+					<h3>喜歡吃</h3>
+					<p>日料、韓料、熱炒、路邊攤、牛肉湯麵、刀削麵。</p>
+				</div>
 
-                <div class="memory-card">
-                    <div class="memory-icon">🍜</div>
-                    <h3>喜歡吃</h3>
-                    <p>日料、韓料、熱炒、路邊攤、牛肉湯麵、刀削麵。</p>
-                </div>
+				<div class="memory-card">
+					<div class="memory-icon">🥚</div>
+					<h3>特別喜歡</h3>
+					<p>起司蛋餅、阿嬤包的鹼粽、菲律賓青豆。</p>
+				</div>
 
-                <div class="memory-card">
-                    <div class="memory-icon">🥚</div>
-                    <h3>特別喜歡</h3>
-                    <p>起司蛋餅、阿嬤包的鹼粽、菲律賓青豆。</p>
-                </div>
+				<div class="memory-card">
+					<div class="memory-icon">🍳</div>
+					<h3>喜歡下廚</h3>
+					<p>約定要吃恩恩做的烤牛奶、金沙豆腐。</p>
+				</div>
 
-                <div class="memory-card">
-                    <div class="memory-icon">🐱</div>
-                    <h3>咪嚕</h3>
-                    <p>一隻可愛的英國長毛貓。</p>
-                </div>
+				<div class="memory-card">
+					<div class="memory-icon">🐱</div>
+					<h3>咪嚕</h3>
+					<p>一隻可愛的英國長毛貓。</p>
+				</div>
 
-                <div class="memory-card">
-                    <div class="memory-icon">🎬</div>
-                    <h3>旅行與回憶</h3>
-                    <p>恩恩去過東京淺草、新宿、秋葉原和東京迪士尼。</p>
-                    <p>有機會想去瑞士</p>
-                </div>
+			</div>
+		</div>
+	</section>
 
-                <div class="memory-card">
-                    <div class="memory-icon">🎰</div>
-                    <h3>過年習慣</h3>
-                    <p>過年的時候喜歡刮刮樂。</p>
-                </div>
 
-                <div class="memory-card">
-                    <div class="memory-icon">🚗</div>
-                    <h3>關於開車</h3>
-                    <p>開 C300，而且第一次開車就撞倒整排機車。</p>
-                </div>
+	<!-- Page 05 -->
+	<section class="story-page page-memory" data-page="4">
+		<div class="page-content">
 
-                <div class="memory-card">
-                    <div class="memory-icon">🦷</div>
-                    <h3>小小潔癖</h3>
-                    <p>不喜歡擠得像爆米花一樣的牙膏。</p>
-                </div>
+			<div class="chapter animate-item">
+				CHAPTER 03
+			</div>
 
-                <div class="memory-card">
-                    <div class="memory-icon">🎵</div>
-                    <h3>不喜歡的歌</h3>
-                    <p>《男子漢的浪漫》。</p>
-                </div>
+			<h2 class="section-title animate-item delay-1">
+				恩恩的小檔案
+			</h2>
 
-                <div class="memory-card">
-                    <div class="memory-icon">📦</div>
-                    <h3>旋轉拍賣</h3>
-                    <p>恩恩有在經營旋轉拍賣。</p>
-                </div>
+			<p class="section-subtitle animate-item delay-2">
+				還有一些，我覺得很可愛的小細節。
+			</p>
 
-            </div>
-        </div>
-    </section>
+			<div class="memory-grid animate-item delay-3">
 
-    <!-- Page 05 -->
-    <section class="story-page page-letter" data-page="4">
+				<div class="memory-card">
+					<div class="memory-icon">🎬</div>
+					<h3>旅行與回憶</h3>
+					<p>
+						恩恩去過東京淺草、新宿、秋葉原和東京迪士尼。
+						有機會想去瑞士。
+					</p>
+				</div>
+
+				<div class="memory-card">
+					<div class="memory-icon">🎰</div>
+					<h3>過年習慣</h3>
+					<p>過年的時候喜歡刮刮樂。</p>
+				</div>
+
+				<div class="memory-card">
+					<div class="memory-icon">🚗</div>
+					<h3>關於開車</h3>
+					<p>開 C300，而且第一次開車就撞倒整排機車。</p>
+				</div>
+
+				<div class="memory-card">
+					<div class="memory-icon">🦷</div>
+					<h3>小小潔癖</h3>
+					<p>不喜歡擠得像爆米花一樣的牙膏。</p>
+				</div>
+
+				<div class="memory-card">
+					<div class="memory-icon">🎵</div>
+					<h3>不喜歡的歌</h3>
+					<p>《男子漢的浪漫》。</p>
+				</div>
+
+				<div class="memory-card">
+					<div class="memory-icon">📦</div>
+					<h3>旋轉拍賣</h3>
+					<p>恩恩有在經營旋轉拍賣。</p>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+    <!-- Page 06 -->
+    <section class="story-page page-letter" data-page="5">
         <div class="page-content">
 
             <div class="chapter animate-item">
@@ -1329,8 +1347,8 @@
         </div>
     </section>
 
-    <!-- Page 06 -->
-    <section class="story-page page-end" data-page="5">
+    <!-- Page 07 -->
+    <section class="story-page page-end" data-page="6">
         <div class="page-content">
 
             <div class="end-heart animate-item">❤️</div>
