@@ -60,6 +60,32 @@
         .page-memory { background: linear-gradient(180deg, #fffaf9 0%, #fff4f5 100%); }
         .page-letter { background: linear-gradient(180deg, #fff4f6 0%, #fffaf9 100%); }
         .page-end { background: linear-gradient(180deg, #fff0f3 0%, #fff8f9 100%); }
+		
+		/* ==================================================
+		   CHAPTER 02
+		   唯一允許內容自然延伸的 Chapter
+		================================================== */
+
+		.page-timeline {
+			min-height: 100vh;
+			height: auto;
+
+			align-items: flex-start;
+
+			padding-top: 60px;
+			padding-bottom: 80px;
+
+			overflow: visible;
+
+			scroll-snap-align: start;
+			scroll-snap-stop: always;
+		}
+
+		.page-timeline .page-content {
+			width: min(900px, 100%);
+			max-height: none;
+			overflow: visible;
+		}
 
         .background-heart {
             position: absolute;
@@ -556,12 +582,21 @@
 			================================================== */
 
 			.story-page {
+				position: relative;
+				width: 100%;
 				min-height: 100vh;
+
 				height: 100vh;
 
-				padding: 20px 16px;
-
+				display: flex;
+				justify-content: center;
 				align-items: center;
+
+				scroll-snap-align: start;
+				scroll-snap-stop: always;
+
+				overflow: hidden;
+				padding: 40px 25px;
 			}
 
 
@@ -752,6 +787,16 @@
 				font-size: 11px;
 
 				line-height: 1.5;
+			}
+			
+			.page-timeline {
+				height: auto;
+				min-height: 100vh;
+				overflow: visible;
+			}
+
+			.page-timeline .page-content {
+				padding-bottom: 30px;
 			}
 
 
@@ -1008,6 +1053,7 @@
     <button class="indicator-dot" data-index="3"></button>
     <button class="indicator-dot" data-index="4"></button>
     <button class="indicator-dot" data-index="5"></button>
+    <button class="indicator-dot" data-index="6"></button>
 </nav>
 
 <!-- ==================================================
@@ -1517,31 +1563,92 @@
 
     let wheelLocked = false;
 
-    container.addEventListener(
-        "wheel",
-        event => {
-            if (wheelLocked) {
-                event.preventDefault();
-                return;
-            }
+	container.addEventListener(
+		"wheel",
+		event => {
 
-            if (Math.abs(event.deltaY) < 10) return;
+			if (wheelLocked) {
+				event.preventDefault();
+				return;
+			}
 
-            event.preventDefault();
-            wheelLocked = true;
+			if (Math.abs(event.deltaY) < 10) return;
 
-            if (event.deltaY > 0) {
-                goToPage(currentPage + 1);
-            } else {
-                goToPage(currentPage - 1);
-            }
+			const timelinePage = document.querySelector(".page-timeline");
 
-            setTimeout(() => {
-                wheelLocked = false;
-            }, 750);
-        },
-        { passive: false }
-    );
+			const timelineRect = timelinePage.getBoundingClientRect();
+
+			/* ==================================================
+			   CHAPTER 02
+			   允許內容自然往下滾
+			================================================== */
+
+			if (currentPage === 2) {
+
+				// 往下
+				if (event.deltaY > 0) {
+
+					const atBottom =
+						timelinePage.scrollHeight -
+						timelinePage.scrollTop -
+						timelinePage.clientHeight <= 5;
+
+					/*
+					 * 如果 CHAPTER 02 還沒到底
+					 * 就讓瀏覽器自然往下滾
+					 */
+					if (!atBottom) {
+						return;
+					}
+
+					/*
+					 * 已經到底
+					 * 才進入下一個 Chapter
+					 */
+				}
+
+				// 往上
+				if (event.deltaY < 0) {
+
+					const atTop =
+						timelinePage.scrollTop <= 5;
+
+					/*
+					 * 還沒到頂
+					 * 就讓它自然往上滾
+					 */
+					if (!atTop) {
+						return;
+					}
+
+					/*
+					 * 已經到頂
+					 * 才回上一個 Chapter
+					*/
+				}
+			}
+
+			/* ==================================================
+			   一般 Chapter
+			================================================== */
+
+			event.preventDefault();
+
+			wheelLocked = true;
+
+			if (event.deltaY > 0) {
+				goToPage(currentPage + 1);
+			} else {
+				goToPage(currentPage - 1);
+			}
+
+			setTimeout(() => {
+				wheelLocked = false;
+			}, 750);
+
+		},
+		{ passive: false }
+	);
 
     /* ==================================================
        鍵盤操作
