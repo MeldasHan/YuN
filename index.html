@@ -2,458 +2,111 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>給恩恩 ❤️</title>
 <style>
-*{box-sizing:border-box}
-html,body{margin:0;padding:0;width:100%;height:100%;font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;background:#fffaf9;color:#675a5e}
-body{overflow:hidden}
-:root{--pink:#c9788b;--muted:#9e8f93;--line:#efd8dd}
-button,input{font:inherit}
-
-.password-screen{
-  position:fixed;inset:0;z-index:9999;
-  display:flex;align-items:center;justify-content:center;
-  padding:24px;
-  background:linear-gradient(180deg,#fff0f3,#fffaf9);
-  transition:.55s
-}
-.password-screen.hidden{opacity:0;visibility:hidden;pointer-events:none}
-.password-box{
-  width:min(390px,100%);
-  padding:34px 24px;
-  text-align:center;
-  background:#ffffffee;
-  border-radius:24px;
-  box-shadow:0 18px 50px #5e384214
-}
-.password-heart{font-size:46px}
-.password-label{font-size:10px;letter-spacing:3px;color:var(--pink)}
-.password-box h1{margin:6px 0;color:var(--pink);font-size:30px;font-weight:500}
-.password-box p{font-size:14px;color:var(--muted)}
-.password-input-group{display:grid;gap:10px}
-.password-input-group input,.password-input-group button{
-  width:100%;height:46px;border-radius:13px;font:inherit
-}
-.password-input-group input{
-  border:1px solid var(--line);text-align:center;outline:none;background:#fff
-}
-.password-input-group button{border:0;background:var(--pink);color:#fff}
-.password-error{font-size:12px;color:var(--pink);opacity:0;min-height:20px;margin-top:8px}
-.password-error.show{opacity:1}
-
-.story-container{
-  width:100vw;
-  height:100vh;
-  height:100dvh;
-  overflow-y:auto;
-  overflow-x:hidden;
-  scroll-snap-type:y mandatory;
-  scroll-behavior:smooth;
-  scrollbar-width:none;
-  overscroll-behavior-y:contain
-}
-.story-container::-webkit-scrollbar{display:none}
-
-.story-page{
-  position:relative;
-  width:100%;
-  min-height:100vh;
-  min-height:100dvh;
-  height:100vh;
-  height:100dvh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:
-    calc(28px + env(safe-area-inset-top))
-    22px
-    calc(28px + env(safe-area-inset-bottom));
-  scroll-snap-align:start;
-  scroll-snap-stop:always;
-  overflow:hidden
-}
-.page-content{
-  width:min(760px,100%);
-  max-height:calc(100dvh - 56px);
-  text-align:center;
-  position:relative;
-  z-index:2
-}
-
-.page-hero{background:linear-gradient(180deg,#fff0f3,#fffaf9)}
-.page-story{background:linear-gradient(180deg,#fffaf9,#fff5f6)}
-.page-about{background:linear-gradient(180deg,#fff7f8,#fffaf9)}
-.page-today{background:linear-gradient(180deg,#fff3f5,#fffaf9)}
-.page-end{background:linear-gradient(180deg,#fffaf9,#fff0f3)}
-
-.hero-heart{font-size:58px;margin-bottom:10px;animation:beat 2.4s ease-in-out infinite}
-@keyframes beat{50%{transform:scale(1.08)}}
-
-.label{
-  margin-bottom:6px;
-  color:var(--pink);
-  font-size:10px;
-  letter-spacing:3px
-}
-h1,h2{
-  color:var(--pink);
-  font-weight:500
-}
-h1{
-  margin:0;
-  font-size:clamp(34px,10vw,50px);
-  letter-spacing:3px
-}
-h2{
-  margin:0 0 8px;
-  font-size:clamp(27px,7vw,36px)
-}
-.subtitle{
-  margin:0 auto 18px;
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.6
-}
-.hero-copy{
-  margin:16px auto 0;
-  max-width:520px;
-  font-size:15px;
-  line-height:1.8
-}
-.hero-date{
-  margin-top:20px;
-  color:#b4a4a8;
-  font-size:11px;
-  letter-spacing:2px
-}
-.scroll-hint{
-  margin-top:34px;
-  color:#b7a6aa;
-  font-size:12px
-}
-.scroll-arrow{
-  margin-top:4px;
-  animation:arrow 1.6s ease-in-out infinite
-}
-@keyframes arrow{50%{transform:translateY(6px)}}
-
-.timeline{
-  position:relative;
-  max-width:560px;
-  margin:0 auto;
-  text-align:left
-}
-.timeline:before{
-  content:"";
-  position:absolute;
-  left:8px;
-  top:7px;
-  bottom:7px;
-  width:1px;
-  background:var(--line)
-}
-.item{
-  position:relative;
-  padding:0 0 14px 32px
-}
-.item:last-child{padding-bottom:0}
-.dot{
-  position:absolute;
-  left:2px;
-  top:6px;
-  width:13px;
-  height:13px;
-  border-radius:50%;
-  background:var(--pink);
-  border:3px solid #fffaf9
-}
-.date{font-size:10px;color:var(--pink)}
-.title{font-size:14px;font-weight:500;line-height:1.35}
-.desc{font-size:11px;color:var(--muted);line-height:1.45}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:8px;
-  width:100%;
-  max-width:520px;
-  margin:0 auto
-}
-.card{
-  min-width:0;
-  padding:11px 9px;
-  background:#ffffffdc;
-  border-radius:15px;
-  box-shadow:0 7px 20px #5a37410d
-}
-.icon{font-size:21px;line-height:1}
-.card h3{
-  margin:5px 0 2px;
-  font-size:13px;
-  font-weight:500
-}
-.card p{
-  margin:0;
-  color:var(--muted);
-  font-size:10px;
-  line-height:1.45
-}
-
-.today-card{
-  width:min(540px,100%);
-  margin:0 auto;
-  padding:22px 18px;
-  background:#ffffffea;
-  border-radius:20px;
-  box-shadow:0 10px 30px #5a37410f
-}
-.today-icon{font-size:40px}
-.today-card p{
-  margin:12px 0 0;
-  font-size:13px;
-  line-height:1.8
-}
-
-.end-heart{font-size:52px;margin-bottom:12px}
-.end-text{font-size:14px;line-height:1.8}
-.memory-link{
-  display:inline-block;
-  margin-top:24px;
-  padding:10px 18px;
-  border:1px solid #e9bcc6;
-  border-radius:999px;
-  color:var(--pink);
-  text-decoration:none;
-  font-size:12px
-}
-
-.page-indicator{
-  position:fixed;
-  top:50%;
-  right:10px;
-  transform:translateY(-50%);
-  z-index:100
-}
-.indicator-dot{
-  display:block;
-  width:6px;
-  height:6px;
-  margin:8px 0;
-  border:0;
-  border-radius:999px;
-  background:#dfc3c9;
-  padding:0;
-  transition:.3s
-}
-.indicator-dot.active{
-  height:18px;
-  background:var(--pink)
-}
-
-.fade{
-  opacity:0;
-  transform:translateY(16px);
-  transition:opacity .7s,transform .7s
-}
-.story-page.active .fade{
-  opacity:1;
-  transform:none
-}
-.delay-1{transition-delay:.12s}
-.delay-2{transition-delay:.24s}
-.delay-3{transition-delay:.36s}
-
-@media(min-width:700px){
-  .story-page{padding:40px 30px}
-  .page-content{max-height:90vh}
-  .grid{grid-template-columns:repeat(3,1fr);gap:12px}
-  .card{padding:15px 13px}
-  .card h3{font-size:14px}
-  .card p{font-size:11px}
-  .timeline{
-    max-width:650px
-  }
-}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#65585c;background:#fffaf9}body{overflow:hidden}
+:root{--pink:#c9788b;--soft:#fff1f4;--muted:#9c8c91;--line:#efd8de}
+.password-screen{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(#fff0f3,#fffaf9);transition:.5s}.password-screen.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.password-box{width:min(390px,100%);padding:34px 24px;text-align:center;background:#ffffffed;border-radius:25px;box-shadow:0 18px 50px #59333e15}.heart{font-size:48px}.eyebrow,.chapter{font-size:10px;letter-spacing:3px;color:var(--pink)}.password-box h1{margin:5px 0;color:var(--pink);font-weight:500}.password-box p{font-size:13px;color:var(--muted)}input,button{font:inherit}.password-box input,.password-box button{display:block;width:100%;height:46px;margin-top:10px;border-radius:13px}.password-box input{border:1px solid var(--line);text-align:center;outline:none}.password-box button{border:0;background:var(--pink);color:white}.password-error{height:20px;margin-top:8px;font-size:12px;color:var(--pink);opacity:0}.password-error.show{opacity:1}
+.story{width:100vw;height:100vh;height:100dvh;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth;scrollbar-width:none}.story::-webkit-scrollbar{display:none}.page{position:relative;width:100%;height:100vh;height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:calc(28px + env(safe-area-inset-top)) 22px calc(28px + env(safe-area-inset-bottom))}.page:nth-child(odd){background:linear-gradient(180deg,#fff1f4,#fffaf9)}.page:nth-child(even){background:linear-gradient(180deg,#fffaf9,#fff5f6)}.content{width:min(720px,100%);text-align:center}.content h1,.content h2{color:var(--pink);font-weight:500}.content h1{font-size:clamp(36px,10vw,52px);margin:5px 0}.content h2{font-size:clamp(26px,7vw,36px);margin:7px 0 5px}.subtitle{font-size:13px;color:var(--muted);line-height:1.7;margin:0 auto 18px}.hero-heart{font-size:60px;animation:beat 2.4s infinite ease-in-out}@keyframes beat{50%{transform:scale(1.08)}}.hero-copy{max-width:520px;margin:18px auto;font-size:15px;line-height:1.9}.date-note{font-size:11px;letter-spacing:2px;color:#b3a2a7}.down{margin-top:30px;color:#b3a2a7;font-size:12px;animation:bob 1.5s infinite}@keyframes bob{50%{transform:translateY(6px)}}
+.timeline{position:relative;max-width:570px;margin:auto;text-align:left}.timeline:before{content:"";position:absolute;left:8px;top:7px;bottom:7px;width:1px;background:var(--line)}.event{position:relative;padding:0 0 12px 32px}.event:last-child{padding-bottom:0}.dot{position:absolute;left:2px;top:5px;width:13px;height:13px;border-radius:50%;background:var(--pink);border:3px solid #fffaf9}.date{font-size:10px;color:var(--pink)}.event-title{font-size:14px;font-weight:500}.event-desc{font-size:11px;color:var(--muted);line-height:1.45}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:540px;margin:auto}.card{padding:11px 8px;background:#ffffffd9;border-radius:15px;box-shadow:0 7px 20px #58313c0b}.icon{font-size:21px}.card h3{font-size:13px;margin:4px 0 2px;font-weight:500}.card p{font-size:10px;line-height:1.45;color:var(--muted);margin:0}
+.promise{max-width:520px;margin:auto;display:grid;gap:10px}.promise-row{display:flex;gap:12px;text-align:left;align-items:flex-start;padding:13px 15px;background:#ffffffd9;border-radius:16px}.promise-icon{font-size:22px}.promise-row h3{margin:0 0 3px;font-size:14px;font-weight:500}.promise-row p{margin:0;font-size:11px;color:var(--muted);line-height:1.5}
+.today-card{max-width:540px;margin:auto;padding:22px 18px;background:#ffffffdf;border-radius:20px;box-shadow:0 10px 30px #58313c0d}.today-card .big{font-size:42px}.today-card p{font-size:13px;line-height:1.8}.memory-link{display:inline-block;margin-top:20px;padding:10px 18px;border:1px solid #e8b8c3;border-radius:999px;color:var(--pink);text-decoration:none;font-size:12px}
+.indicator{position:fixed;right:10px;top:50%;transform:translateY(-50%);z-index:50}.indicator button{display:block;width:6px;height:6px;padding:0;margin:8px 0;border:0;border-radius:9px;background:#ddc1c8;transition:.25s}.indicator button.active{height:18px;background:var(--pink)}
+.fade{opacity:0;transform:translateY(15px);transition:.65s}.page.active .fade{opacity:1;transform:none}.d1{transition-delay:.12s}.d2{transition-delay:.24s}
+@media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr);gap:12px}.card{padding:15px 12px}.card p{font-size:11px}}
 </style>
 </head>
 <body>
 
 <div class="password-screen" id="passwordScreen">
   <div class="password-box">
-    <div class="password-heart">❤️</div>
-    <div class="password-label">A LITTLE SURPRISE FOR YOU</div>
+    <div class="heart">❤️</div>
+    <div class="eyebrow">A LITTLE SURPRISE FOR YOU</div>
     <h1>給恩恩</h1>
     <p>輸入我們的小密碼，就可以進來了。</p>
-    <div class="password-input-group">
-      <input type="password" id="passwordInput" placeholder="輸入密碼" autocomplete="off">
-      <button id="passwordButton">進入 ❤️</button>
-    </div>
+    <input id="passwordInput" type="password" placeholder="輸入密碼" autocomplete="off">
+    <button id="passwordButton">進入 ❤️</button>
     <div class="password-error" id="passwordError">密碼好像不對，再試一次看看。</div>
   </div>
 </div>
 
-<nav class="page-indicator">
-  <button class="indicator-dot active" data-index="0"></button>
-  <button class="indicator-dot" data-index="1"></button>
-  <button class="indicator-dot" data-index="2"></button>
-  <button class="indicator-dot" data-index="3"></button>
-  <button class="indicator-dot" data-index="4"></button>
-</nav>
-
-<main class="story-container" id="storyContainer">
-
-<section class="story-page page-hero active" data-page="0">
-  <div class="page-content">
-    <div class="hero-heart fade">❤️</div>
-    <div class="label fade delay-1">FOR EN EN</div>
-    <h1 class="fade delay-1">給恩恩</h1>
-    <p class="hero-copy fade delay-2">
-      從 8 月 8 日開始，我慢慢記住了一些關於妳的事情。<br>
-      今天把它們整理成一個小小的地方，送給妳。
-    </p>
-    <div class="hero-date fade delay-2">2026 · Our little story</div>
-    <div class="scroll-hint fade delay-3">往下看看<div class="scroll-arrow">↓</div></div>
+<nav class="indicator" id="indicator"></nav>
+<main class="story" id="story">
+<section class="page active">
+  <div class="content">
+    <div class="hero-heart fade">❤️</div><div class="chapter fade d1">FOR EN EN</div>
+    <h1 class="fade d1">給恩恩</h1>
+    <p class="hero-copy fade d2">從 8 月 8 日開始，我慢慢記住了一些關於妳的事情。<br>今天把它們整理成一個小小的地方，送給妳。</p>
+    <div class="date-note fade d2">2026 · OUR LITTLE STORY</div><div class="down fade d2">往下看看<br>↓</div>
   </div>
 </section>
-
-<section class="story-page page-story" data-page="1">
-  <div class="page-content">
-    <div class="label fade">OUR STORY</div>
-    <h2 class="fade delay-1">從認識妳開始</h2>
-    <p class="subtitle fade delay-1">一點一點，把這段時間留下來。</p>
-    <div class="timeline fade delay-2">
-      <div class="item"><span class="dot"></span><div class="date">08 / 08</div><div class="title">認識恩恩</div><div class="desc">故事從這一天開始。</div></div>
-      <div class="item"><span class="dot"></span><div class="date">08 / 16</div><div class="title">第一次聽到妳的聲音</div><div class="desc">第一次真正聽見恩恩的聲音。</div></div>
-      <div class="item"><span class="dot"></span><div class="date">08 / 17</div><div class="title">看到咪嚕的可愛照片</div><div class="desc">可愛的英國長毛貓咪嚕登場 🐱</div></div>
-      <div class="item"><span class="dot"></span><div class="date">08 / 20</div><div class="title">跟恩恩打勾勾</div><div class="desc">🤲 一個想好好記住的小約定。</div></div>
-      <div class="item"><span class="dot"></span><div class="date">08 / 21</div><div class="title">認識黛黛</div><div class="desc">也慢慢認識更多妳生活裡重要的人。</div></div>
-      <div class="item"><span class="dot"></span><div class="date">10 月底</div><div class="title">約定好的約會</div><div class="desc">然後，終於來到了今天。</div></div>
+<section class="page">
+  <div class="content">
+    <div class="chapter fade">CHAPTER 01</div><h2 class="fade d1">我們的故事</h2><p class="subtitle fade d1">從認識妳開始，一點一點把回憶留下來。</p>
+    <div class="timeline fade d2">
+      <div class="event"><span class="dot"></span><div class="date">08 / 08</div><div class="event-title">認識恩恩</div><div class="event-desc">故事從這一天開始。</div></div>
+      <div class="event"><span class="dot"></span><div class="date">08 / 16</div><div class="event-title">第一次聽到恩恩的聲音</div></div>
+      <div class="event"><span class="dot"></span><div class="date">08 / 17</div><div class="event-title">第一次看到咪嚕的可愛照片 🐱</div></div>
+      <div class="event"><span class="dot"></span><div class="date">08 / 20</div><div class="event-title">跟恩恩打勾勾 🤲</div><div class="event-desc">一個想好好記住的小約定。</div></div>
+      <div class="event"><span class="dot"></span><div class="date">08 / 21</div><div class="event-title">認識黛黛</div></div>
+      <div class="event"><span class="dot"></span><div class="date">10 月底</div><div class="event-title">約定好的約會</div><div class="event-desc">然後，終於來到了今天。</div></div>
     </div>
   </div>
 </section>
-
-<section class="story-page page-about" data-page="2">
-  <div class="page-content">
-    <div class="label fade">ABOUT YOU</div>
-    <h2 class="fade delay-1">我慢慢知道的恩恩</h2>
-    <p class="subtitle fade delay-1">都是一些小事，但我想記得。</p>
-    <div class="grid fade delay-2">
-      <div class="card"><div class="icon">🌷</div><h3>像洋桔梗</h3><p>溫柔，也有自己的樣子。</p></div>
-      <div class="card"><div class="icon">☕</div><h3>喜歡的事</h3><p>烘焙、咖啡、恐怖片、動漫。</p></div>
-      <div class="card"><div class="icon">🍳</div><h3>喜歡下廚</h3><p>約好了烤牛奶和金沙豆腐。</p></div>
-      <div class="card"><div class="icon">🐱</div><h3>咪嚕</h3><p>可愛的英國長毛貓。</p></div>
-      <div class="card"><div class="icon">🍜</div><h3>喜歡吃</h3><p>日料、韓料、熱炒、路邊攤。</p></div>
-      <div class="card"><div class="icon">💬</div><h3>直來直往</h3><p>喜歡直接，不喜歡拐彎抹角。</p></div>
+<section class="page">
+  <div class="content">
+    <div class="chapter fade">CHAPTER 02</div><h2 class="fade d1">我慢慢知道的恩恩</h2><p class="subtitle fade d1">不是資料，是妳說過的小事，我都有慢慢記住。</p>
+    <div class="grid fade d2">
+      <div class="card"><div class="icon">🌷</div><h3>像洋桔梗</h3><p>有著自己的溫柔。</p></div>
+      <div class="card"><div class="icon">🍳</div><h3>喜歡下廚</h3><p>烤牛奶、金沙豆腐，說好了要吃。</p></div>
+      <div class="card"><div class="icon">🎀</div><h3>超愛三麗鷗</h3><p>8/30 記住的重要喜好。</p></div>
+      <div class="card"><div class="icon">☁️</div><h3>軟軟的東西</h3><p>摸起來軟軟的，可以讓恩恩紓壓。</p></div>
+      <div class="card"><div class="icon">🍣</div><h3>爭鮮必吃</h3><p>玉子燒＋涼拌海帶。</p></div>
+      <div class="card"><div class="icon">🍰</div><h3>喜歡巴斯克</h3><p>巴斯克乳酪蛋糕。</p></div>
     </div>
   </div>
 </section>
-
-<section class="story-page page-today" data-page="3">
-  <div class="page-content">
-    <div class="label fade">TODAY</div>
-    <h2 class="fade delay-1">然後，來到了今天</h2>
-    <p class="subtitle fade delay-1">原本說好的「10 月底要約會」，現在真的發生了。</p>
-    <div class="today-card fade delay-2">
-      <div class="today-icon">💐</div>
-      <p>
-        這束花、這張小卡片，還有這個藏在 QR Code 裡的網站，
-        都是我想留給妳的一點小驚喜。
-      </p>
-      <p>
-        很高興在 2026 年 8 月 8 日認識妳，
-        也很開心，今天真的能見到妳。
-      </p>
+<section class="page">
+  <div class="content">
+    <div class="chapter fade">CHAPTER 03</div><h2 class="fade d1">我們說好的事情</h2><p class="subtitle fade d1">有些小約定，我想一直記得。</p>
+    <div class="promise fade d2">
+      <div class="promise-row"><div class="promise-icon">🚗</div><div><h3>開車不能玩手機</h3><p>8/24，我們之間的小約定。</p></div></div>
+      <div class="promise-row"><div class="promise-icon">🍳</div><div><h3>要吃恩恩做的料理</h3><p>烤牛奶、金沙豆腐。</p></div></div>
+      <div class="promise-row"><div class="promise-icon">🍜</div><div><h3>一起去吃螺螄粉</h3><p>9/1，恩恩說之後要帶我去吃。</p></div></div>
     </div>
   </div>
 </section>
-
-<section class="story-page page-end" data-page="4">
-  <div class="page-content">
-    <div class="end-heart fade">❤️</div>
-    <h2 class="fade delay-1">很高興認識妳，恩恩。</h2>
-    <p class="end-text fade delay-2">
-      我們的故事才剛開始。<br>
-      接下來的回憶，再慢慢一起寫下來。
-    </p>
-    <a class="memory-link fade delay-3" href="memories.html">看看我們完整的回憶</a>
+<section class="page">
+  <div class="content">
+    <div class="chapter fade">A LITTLE DREAM</div><h2 class="fade d1">恩恩小時候的夢想</h2>
+    <p class="subtitle fade d1">空姐、醫生、護士、魔法師、美髮師、農夫、開潛水艇的人……還有迪士尼公主。</p>
+    <div class="today-card fade d2"><div class="big">👑</div><p>這樣看起來，恩恩目前最像完成的應該是「公主」吧。</p><p><strong>畢竟現在恩恩是翰翰ㄉ小公主 ❤️</strong></p></div>
   </div>
 </section>
-
+<section class="page">
+  <div class="content">
+    <div class="chapter fade">TODAY</div><h2 class="fade d1">然後，來到了今天</h2><p class="subtitle fade d1">原本說好的「10 月底要約會」，現在真的發生了。</p>
+    <div class="today-card fade d2"><div class="big">💐</div><p>這束花、這張小卡片，還有這個藏在 QR Code 裡的網站，都是我想留給妳的一點小驚喜。</p><p>很高興在 2026 年 8 月 8 日認識妳，也很開心，今天真的能見到妳。</p></div>
+  </div>
+</section>
+<section class="page">
+  <div class="content">
+    <div class="hero-heart fade">❤️</div><h2 class="fade d1">很高興認識妳，恩恩。</h2><p class="hero-copy fade d2">我們的故事才剛開始。<br>接下來的回憶，再慢慢一起寫下來。</p>
+    <a class="memory-link fade d2" href="memories.html">看看我們完整的回憶</a>
+  </div>
+</section>
 </main>
-
 <script>
-const PASSWORD="恩恩";
-const passwordScreen=document.getElementById("passwordScreen");
-const passwordInput=document.getElementById("passwordInput");
-const passwordButton=document.getElementById("passwordButton");
-const passwordError=document.getElementById("passwordError");
-
-function checkPassword(){
-  if(passwordInput.value.trim()===PASSWORD){
-    passwordError.classList.remove("show");
-    passwordScreen.classList.add("hidden");
-    container.scrollTo({top:0,behavior:"instant"});
-    currentPage=0;
-    updateIndicator(0);
-  }else{
-    passwordError.classList.add("show");
-    passwordInput.value="";
-    passwordInput.focus();
-  }
-}
-passwordButton.addEventListener("click",checkPassword);
-passwordInput.addEventListener("keydown",e=>{if(e.key==="Enter")checkPassword()});
-
-const container=document.getElementById("storyContainer");
-const pages=document.querySelectorAll(".story-page");
-const indicators=document.querySelectorAll(".indicator-dot");
-let currentPage=0;
-
-function goToPage(index){
-  index=Math.max(0,Math.min(index,pages.length-1));
-  currentPage=index;
-  pages[index].scrollIntoView({behavior:"smooth",block:"start"});
-  updateIndicator(index);
-}
-
-function updateIndicator(index){
-  indicators.forEach((dot,i)=>dot.classList.toggle("active",i===index));
-}
-
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting && entry.intersectionRatio>=0.6){
-      const index=Number(entry.target.dataset.page);
-      currentPage=index;
-      updateIndicator(index);
-      entry.target.classList.add("active");
-    }
-  })
-},{root:container,threshold:.6});
-
-pages.forEach(page=>observer.observe(page));
-
-indicators.forEach(dot=>{
-  dot.addEventListener("click",()=>goToPage(Number(dot.dataset.index)));
-});
-
-let wheelLocked=false;
-container.addEventListener("wheel",e=>{
-  if(wheelLocked){e.preventDefault();return}
-  if(Math.abs(e.deltaY)<10)return;
-  e.preventDefault();
-  wheelLocked=true;
-  goToPage(currentPage+(e.deltaY>0?1:-1));
-  setTimeout(()=>wheelLocked=false,700);
-},{passive:false});
-
-document.addEventListener("keydown",e=>{
-  if(e.key==="ArrowDown"||e.key==="PageDown")goToPage(currentPage+1);
-  if(e.key==="ArrowUp"||e.key==="PageUp")goToPage(currentPage-1);
-});
-
-updateIndicator(0);
+const PASSWORD="恩恩",screen=document.getElementById("passwordScreen"),input=document.getElementById("passwordInput"),err=document.getElementById("passwordError"),story=document.getElementById("story"),pages=[...document.querySelectorAll(".page")],indicator=document.getElementById("indicator");let current=0,locked=false;
+function unlock(){if(input.value.trim()===PASSWORD){screen.classList.add("hidden");story.scrollTo({top:0});}else{err.classList.add("show");input.value="";input.focus()}}
+document.getElementById("passwordButton").onclick=unlock;input.onkeydown=e=>{if(e.key==="Enter")unlock()};
+pages.forEach((_,i)=>{let b=document.createElement("button");if(!i)b.classList.add("active");b.onclick=()=>go(i);indicator.appendChild(b)});
+const dots=[...indicator.children];function go(i){i=Math.max(0,Math.min(i,pages.length-1));current=i;pages[i].scrollIntoView({behavior:"smooth"});dots.forEach((d,n)=>d.classList.toggle("active",n===i))}
+new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>.6){current=pages.indexOf(e.target);e.target.classList.add("active");dots.forEach((d,n)=>d.classList.toggle("active",n===current))}}),{root:story,threshold:.6}).observe(pages[0]);
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>.6){current=pages.indexOf(e.target);e.target.classList.add("active");dots.forEach((d,n)=>d.classList.toggle("active",n===current))}}),{root:story,threshold:.6});pages.forEach(p=>obs.observe(p));
+story.addEventListener("wheel",e=>{if(locked){e.preventDefault();return}if(Math.abs(e.deltaY)<10)return;e.preventDefault();locked=true;go(current+(e.deltaY>0?1:-1));setTimeout(()=>locked=false,700)},{passive:false});
 </script>
-</body>
-</html>
+</body></html>
